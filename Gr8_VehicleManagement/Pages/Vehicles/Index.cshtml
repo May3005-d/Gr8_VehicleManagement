@@ -1,0 +1,195 @@
+@page
+@model Gr8_VehicleManagement.Pages.Vehicles.IndexModel
+@{
+    ViewData["Title"] = "Danh Sách Xe";
+}
+
+<div class="container-fluid mt-4">
+    <div class="row mb-4">
+        <div class="col-md-6">
+            <h1 class="fade-in-up"><i class="bi bi-car-front me-2"></i> Danh Sách Xe Điện</h1>
+        </div>
+        <div class="col-md-6 text-end">
+            @if (Model.CanCreate)
+            {
+                <a href="/Vehicles/Create" class="btn btn-primary btn-custom">
+                    <i class="bi bi-plus-circle me-2"></i> Thêm Mẫu Xe
+                </a>
+            }
+        </div>
+    </div>
+
+    <!-- Search & Filters -->
+    <div class="card mb-4">
+        <div class="card-body">
+            <form method="get" class="row g-3">
+                <div class="col-md-4">
+                    <label class="form-label">Tìm kiếm</label>
+                    <input type="text" name="searchTerm" class="form-control" placeholder="Tên xe, mã xe..." value="@Model.SearchTerm" />
+                </div>
+                <div class="col-md-3">
+                    <label class="form-label">Loại xe</label>
+                    <select name="category" class="form-select">
+                        <option value="">Tất cả</option>
+                        @foreach (var cat in Model.Categories)
+                        {
+                            <option value="@cat" selected="@(Model.Category == cat)">@cat</option>
+                        }
+                    </select>
+                </div>
+                <div class="col-md-2">
+                    <label class="form-label">Giá từ (VNĐ)</label>
+                    <input type="number" name="minPrice" class="form-control" placeholder="0" value="@Model.MinPrice" />
+                </div>
+                <div class="col-md-2">
+                    <label class="form-label">Giá đến (VNĐ)</label>
+                    <input type="number" name="maxPrice" class="form-control" placeholder="0" value="@Model.MaxPrice" />
+                </div>
+                <div class="col-md-1 d-flex align-items-end">
+                    <button type="submit" class="btn btn-primary w-100">
+                        <i class="bi bi-search"></i>
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Results Info -->
+    <div class="row mb-3">
+        <div class="col">
+            <p class="text-muted">
+                Hiển thị <strong>@Model.Vehicles.Count</strong> trong tổng số <strong>@Model.TotalCount</strong> xe
+            </p>
+        </div>
+    </div>
+
+    <!-- Vehicle List -->
+    <div class="row g-4">
+        @foreach (var vehicle in Model.Vehicles)
+        {
+            <div class="col-md-6 col-lg-4">
+                <div class="card h-100 shadow-sm">
+                    <!-- Image -->
+                    <div style="height: 200px; overflow: hidden; background-color: #f8f9fa;">
+                        @if (vehicle.Images.Any())
+                        {
+                            var defaultImg = vehicle.Images.FirstOrDefault(i => i.IsDefault) ?? vehicle.Images.First();
+                            <img src="@defaultImg.ImageUrl" class="card-img-top" alt="@vehicle.Name" 
+                                 style="object-fit: cover; height: 100%; width: 100%;" />
+                        }
+                        else
+                        {
+                            <div class="d-flex align-items-center justify-content-center h-100">
+                                <i class="bi bi-image text-muted" style="font-size: 4rem;"></i>
+                            </div>
+                        }
+                    </div>
+
+                    <div class="card-body">
+                        <h5 class="card-title">
+                            <a href="/Vehicles/Details?id=@vehicle.Id" class="text-decoration-none text-dark">
+                                @vehicle.Name
+                            </a>
+                        </h5>
+                        <p class="text-muted mb-2">
+                            <i class="bi bi-tag"></i> @vehicle.Code | 
+                            <i class="bi bi-folder"></i> @vehicle.Category
+                        </p>
+                        
+                        @if (vehicle.Description != null && vehicle.Description.Length > 100)
+                        {
+                            <p class="card-text small">@vehicle.Description.Substring(0, 100)...</p>
+                        }
+                        else
+                        {
+                            <p class="card-text small">@vehicle.Description</p>
+                        }
+
+                        <!-- Price Range -->
+                        @if (vehicle.MinPrice.HasValue && vehicle.MaxPrice.HasValue)
+                        {
+                            <div class="mb-2">
+                                <strong class="text-primary">
+                                    @vehicle.MinPrice.Value.ToString("N0") VNĐ
+                                    @if (vehicle.MinPrice.Value != vehicle.MaxPrice.Value)
+                                    {
+                                        <span> - @vehicle.MaxPrice.Value.ToString("N0") VNĐ</span>
+                                    }
+                                </strong>
+                            </div>
+                        }
+
+                        <!-- Stats -->
+                        <div class="d-flex justify-content-between text-muted small mb-3">
+                            <span><i class="bi bi-palette"></i> @vehicle.VersionCount phiên bản</span>
+                            <span><i class="bi bi-box"></i> @vehicle.InventoryCount xe</span>
+                        </div>
+
+                        <!-- Status Badge -->
+                        @if (vehicle.IsActive)
+                        {
+                            <span class="badge bg-success">Đang kinh doanh</span>
+                        }
+                        else
+                        {
+                            <span class="badge bg-secondary">Ngừng kinh doanh</span>
+                        }
+                    </div>
+
+                    <div class="card-footer bg-white">
+                        <div class="d-grid gap-2">
+                            <a href="/Vehicles/Details?id=@vehicle.Id" class="btn btn-sm btn-outline-primary">
+                                <i class="bi bi-eye"></i> Xem Chi Tiết
+                            </a>
+                            @if (Model.CanEdit)
+                            {
+                                <a href="/Vehicles/Edit?id=@vehicle.Id" class="btn btn-sm btn-outline-secondary">
+                                    <i class="bi bi-pencil"></i> Chỉnh Sửa
+                                </a>
+                            }
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+
+    <!-- No Results -->
+    @if (Model.TotalCount == 0)
+    {
+        <div class="text-center py-5">
+            <i class="bi bi-inbox" style="font-size: 5rem; color: #ccc;"></i>
+            <p class="text-muted mt-3">Không tìm thấy xe nào</p>
+        </div>
+    }
+
+    <!-- Pagination -->
+    @if (Model.TotalPages > 1)
+    {
+        <nav class="mt-4" aria-label="Page navigation">
+            <ul class="pagination justify-content-center">
+                <li class="page-item @(Model.HasPreviousPage ? "" : "disabled")">
+                    <a class="page-link" href="?pageNumber=@(Model.PageNumber - 1)&searchTerm=@Model.SearchTerm&category=@Model.Category&minPrice=@Model.MinPrice&maxPrice=@Model.MaxPrice">
+                        Trước
+                    </a>
+                </li>
+
+                @for (int i = Math.Max(1, Model.PageNumber - 2); i <= Math.Min(Model.TotalPages, Model.PageNumber + 2); i++)
+                {
+                    <li class="page-item @(i == Model.PageNumber ? "active" : "")">
+                        <a class="page-link" href="?pageNumber=@i&searchTerm=@Model.SearchTerm&category=@Model.Category&minPrice=@Model.MinPrice&maxPrice=@Model.MaxPrice">
+                            @i
+                        </a>
+                    </li>
+                }
+
+                <li class="page-item @(Model.HasNextPage ? "" : "disabled")">
+                    <a class="page-link" href="?pageNumber=@(Model.PageNumber + 1)&searchTerm=@Model.SearchTerm&category=@Model.Category&minPrice=@Model.MinPrice&maxPrice=@Model.MaxPrice">
+                        Sau
+                    </a>
+                </li>
+            </ul>
+        </nav>
+    }
+</div>
+

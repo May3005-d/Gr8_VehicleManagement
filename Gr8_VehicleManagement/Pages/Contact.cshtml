@@ -1,0 +1,304 @@
+@page
+@model Gr8_VehicleManagement.Pages.ContactModel
+@{
+    ViewData["Title"] = "Liên hệ";
+}
+
+<div class="container-fluid">
+    <!-- Hero Section -->
+    <div class="row hero-section">
+        <div class="col-12">
+            <div class="hero-content text-center">
+                <h1 class="display-4 fw-bold text-white mb-4">LIÊN HỆ VỚI CHÚNG TÔI</h1>
+                <p class="lead text-white mb-5">Chúng tôi luôn sẵn sàng hỗ trợ bạn 24/7</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="container py-5">
+        <div class="row">
+            <!-- Contact Information -->
+            <div class="col-lg-4 mb-5">
+                <div class="contact-info">
+                    <h3 class="text-primary mb-4">Thông tin liên hệ</h3>
+                    
+                    <div class="contact-item mb-4">
+                        <div class="contact-icon">
+                            <i class="fas fa-map-marker-alt text-primary"></i>
+                        </div>
+                        <div class="contact-details">
+                            <h5>Địa chỉ</h5>
+                            <p class="text-muted">
+                                123 Đường ABC, Quận XYZ<br>
+                                Thành phố Hồ Chí Minh, Việt Nam
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="contact-item mb-4">
+                        <div class="contact-icon">
+                            <i class="fas fa-phone text-primary"></i>
+                        </div>
+                        <div class="contact-details">
+                            <h5>Điện thoại</h5>
+                            <p class="text-muted">
+                                <a href="tel:+84123456789" class="text-decoration-none">+84 123 456 789</a><br>
+                                <a href="tel:+84987654321" class="text-decoration-none">+84 987 654 321</a>
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="contact-item mb-4">
+                        <div class="contact-icon">
+                            <i class="fas fa-envelope text-primary"></i>
+                        </div>
+                        <div class="contact-details">
+                            <h5>Email</h5>
+                            <p class="text-muted">
+                                <a href="mailto:info@gr8vehicle.com" class="text-decoration-none">info@gr8vehicle.com</a><br>
+                                <a href="mailto:support@gr8vehicle.com" class="text-decoration-none">support@gr8vehicle.com</a>
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="contact-item mb-4">
+                        <div class="contact-icon">
+                            <i class="fas fa-clock text-primary"></i>
+                        </div>
+                        <div class="contact-details">
+                            <h5>Giờ làm việc</h5>
+                            <p class="text-muted">
+                                Thứ 2 - Thứ 6: 8:00 - 18:00<br>
+                                Thứ 7: 8:00 - 12:00<br>
+                                Chủ nhật: Nghỉ
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Contact Form -->
+            <div class="col-lg-8">
+                <div class="contact-form">
+                    <h3 class="text-primary mb-4">Gửi tin nhắn cho chúng tôi</h3>
+                    <form method="post">
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label for="name" class="form-label">Họ và tên *</label>
+                                <input type="text" class="form-control" id="name" name="Name" required>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label for="email" class="form-label">Email *</label>
+                                <input type="email" class="form-control" id="email" name="Email" required>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label for="phone" class="form-label">Số điện thoại</label>
+                                <input type="tel" class="form-control" id="phone" name="Phone">
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label for="subject" class="form-label">Chủ đề *</label>
+                                <select class="form-select" id="subject" name="Subject" required>
+                                    <option value="">Chọn chủ đề</option>
+                                    <option value="Hỗ trợ kỹ thuật">Hỗ trợ kỹ thuật</option>
+                                    <option value="Tư vấn sản phẩm">Tư vấn sản phẩm</option>
+                                    <option value="Báo giá">Báo giá</option>
+                                    <option value="Khiếu nại">Khiếu nại</option>
+                                    <option value="Khác">Khác</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <label for="message" class="form-label">Nội dung tin nhắn *</label>
+                            <textarea class="form-control" id="message" name="Message" rows="5" required></textarea>
+                        </div>
+                        <div class="mb-3 form-check">
+                            <input type="checkbox" class="form-check-input" id="agree" name="AgreeToTerms" required>
+                            <label class="form-check-label" for="agree">
+                                Tôi đồng ý với <a href="/Privacy" class="text-primary">chính sách bảo mật</a> và điều khoản sử dụng
+                            </label>
+                        </div>
+                        <button type="submit" class="btn btn-primary btn-lg">
+                            <i class="fas fa-paper-plane me-2"></i>Gửi tin nhắn
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <!-- Map Section -->
+        <div class="row mt-5">
+            <div class="col-12">
+                <h3 class="text-center mb-4">Vị trí của chúng tôi</h3>
+                <div class="map-container">
+                    <div class="map-placeholder">
+                        <i class="fas fa-map-marked-alt text-primary mb-3" style="font-size: 3rem;"></i>
+                        <h5>Bản đồ sẽ được hiển thị tại đây</h5>
+                        <p class="text-muted">Địa chỉ: 123 Đường ABC, Quận XYZ, TP.HCM</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- FAQ Section -->
+        <div class="row mt-5">
+            <div class="col-12">
+                <h3 class="text-center mb-5">Câu hỏi thường gặp</h3>
+                <div class="accordion" id="faqAccordion">
+                    <div class="accordion-item">
+                        <h2 class="accordion-header" id="faq1">
+                            <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapse1">
+                                Làm thế nào để liên hệ hỗ trợ kỹ thuật?
+                            </button>
+                        </h2>
+                        <div id="collapse1" class="accordion-collapse collapse show" data-bs-parent="#faqAccordion">
+                            <div class="accordion-body">
+                                Bạn có thể liên hệ qua email support@gr8vehicle.com hoặc gọi hotline +84 123 456 789. 
+                                Chúng tôi sẽ phản hồi trong vòng 24 giờ.
+                            </div>
+                        </div>
+                    </div>
+                    <div class="accordion-item">
+                        <h2 class="accordion-header" id="faq2">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse2">
+                                Thời gian phản hồi là bao lâu?
+                            </button>
+                        </h2>
+                        <div id="collapse2" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                            <div class="accordion-body">
+                                Chúng tôi cam kết phản hồi mọi yêu cầu trong vòng 24 giờ làm việc. 
+                                Đối với các vấn đề khẩn cấp, chúng tôi sẽ phản hồi trong vòng 2 giờ.
+                            </div>
+                        </div>
+                    </div>
+                    <div class="accordion-item">
+                        <h2 class="accordion-header" id="faq3">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse3">
+                                Có hỗ trợ ngoài giờ làm việc không?
+                            </button>
+                        </h2>
+                        <div id="collapse3" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                            <div class="accordion-body">
+                                Có, chúng tôi cung cấp hỗ trợ 24/7 cho các khách hàng VIP và các vấn đề khẩn cấp. 
+                                Vui lòng gọi hotline để được hỗ trợ.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+.hero-section {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    padding: 100px 0;
+    margin-bottom: 0;
+}
+
+.contact-info {
+    background: #f8f9fa;
+    padding: 30px;
+    border-radius: 15px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+}
+
+.contact-item {
+    display: flex;
+    align-items: flex-start;
+    margin-bottom: 25px;
+}
+
+.contact-icon {
+    width: 50px;
+    height: 50px;
+    background: rgba(102, 126, 234, 0.1);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 20px;
+    flex-shrink: 0;
+}
+
+.contact-icon i {
+    font-size: 1.2rem;
+}
+
+.contact-details h5 {
+    margin-bottom: 5px;
+    color: #333;
+}
+
+.contact-form {
+    background: white;
+    padding: 40px;
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+}
+
+.form-control, .form-select {
+    border-radius: 10px;
+    border: 2px solid #e9ecef;
+    padding: 12px 15px;
+    transition: all 0.3s ease;
+}
+
+.form-control:focus, .form-select:focus {
+    border-color: #667eea;
+    box-shadow: 0 0 0 0.2rem rgba(102, 126, 234, 0.25);
+}
+
+.btn-primary {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    border: none;
+    border-radius: 10px;
+    padding: 12px 30px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+}
+
+.btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 25px rgba(102, 126, 234, 0.3);
+}
+
+.map-container {
+    background: #f8f9fa;
+    border-radius: 15px;
+    padding: 60px 20px;
+    text-align: center;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+}
+
+.map-placeholder {
+    color: #6c757d;
+}
+
+.accordion-item {
+    border: none;
+    margin-bottom: 10px;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+}
+
+.accordion-button {
+    background: #f8f9fa;
+    border: none;
+    font-weight: 600;
+    color: #333;
+}
+
+.accordion-button:not(.collapsed) {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+}
+
+.accordion-button:focus {
+    box-shadow: none;
+    border: none;
+}
+</style>

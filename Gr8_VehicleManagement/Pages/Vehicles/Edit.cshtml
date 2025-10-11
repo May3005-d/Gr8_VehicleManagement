@@ -1,0 +1,193 @@
+@page
+@model Gr8_VehicleManagement.Pages.Vehicles.EditModel
+@{
+    ViewData["Title"] = "Chỉnh Sửa Mẫu Xe";
+}
+
+<div class="container-fluid mt-4">
+    <div class="row mb-4">
+        <div class="col-md-6">
+            <h1><i class="bi bi-pencil-square"></i> Chỉnh Sửa Mẫu Xe</h1>
+        </div>
+        <div class="col-md-6 text-end">
+            <a href="/Vehicles" class="btn btn-outline-secondary">
+                <i class="bi bi-arrow-left"></i> Quay Lại
+            </a>
+        </div>
+    </div>
+
+    @if (!string.IsNullOrEmpty(Model.ErrorMessage))
+    {
+        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+            <i class="bi bi-exclamation-triangle-fill"></i> @Model.ErrorMessage
+            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+        </div>
+    }
+
+    <div class="row">
+        <div class="col-lg-8">
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="mb-0">Thông Tin Mẫu Xe</h5>
+                </div>
+                <div class="card-body">
+                    <form method="post" enctype="multipart/form-data">
+                        <input type="hidden" asp-for="Input.Id" />
+                        
+                        <div class="row g-3">
+                            <div class="col-md-6">
+                                <label asp-for="Input.Name" class="form-label">Tên Mẫu Xe *</label>
+                                <input asp-for="Input.Name" class="form-control" placeholder="VD: Tesla Model 3" />
+                                <span asp-validation-for="Input.Name" class="text-danger small"></span>
+                            </div>
+                            
+                            <div class="col-md-6">
+                                <label asp-for="Input.Code" class="form-label">Mã Mẫu Xe *</label>
+                                <input asp-for="Input.Code" class="form-control" placeholder="VD: TM3" />
+                                <span asp-validation-for="Input.Code" class="text-danger small"></span>
+                            </div>
+                            
+                            <div class="col-md-6">
+                                <label asp-for="Input.Category" class="form-label">Loại Xe *</label>
+                                <select asp-for="Input.Category" class="form-select">
+                                    <option value="">Chọn loại xe</option>
+                                    <option value="Sedan">Sedan</option>
+                                    <option value="SUV">SUV</option>
+                                    <option value="Hatchback">Hatchback</option>
+                                    <option value="Coupe">Coupe</option>
+                                    <option value="Convertible">Convertible</option>
+                                </select>
+                                <span asp-validation-for="Input.Category" class="text-danger small"></span>
+                            </div>
+                            
+                            <div class="col-md-6">
+                                <label asp-for="Input.Brand" class="form-label">Thương Hiệu *</label>
+                                <input asp-for="Input.Brand" class="form-control" placeholder="VD: Tesla, BMW, Audi" />
+                                <span asp-validation-for="Input.Brand" class="text-danger small"></span>
+                            </div>
+                            
+                            <div class="col-12">
+                                <label asp-for="Input.Description" class="form-label">Mô Tả</label>
+                                <textarea asp-for="Input.Description" class="form-control" rows="4" placeholder="Mô tả chi tiết về mẫu xe..."></textarea>
+                                <span asp-validation-for="Input.Description" class="text-danger small"></span>
+                            </div>
+                            
+                            <div class="col-md-6">
+                                <label asp-for="Input.EngineType" class="form-label">Loại Động Cơ</label>
+                                <select asp-for="Input.EngineType" class="form-select">
+                                    <option value="">Chọn loại động cơ</option>
+                                    <option value="Electric">Điện</option>
+                                    <option value="Hybrid">Hybrid</option>
+                                    <option value="Plug-in Hybrid">Plug-in Hybrid</option>
+                                </select>
+                            </div>
+                            
+                            <div class="col-md-6">
+                                <label asp-for="Input.BatteryCapacity" class="form-label">Dung Lượng Pin (kWh)</label>
+                                <input asp-for="Input.BatteryCapacity" type="number" step="0.1" class="form-control" placeholder="VD: 75.0" />
+                            </div>
+                            
+                            <div class="col-md-4">
+                                <label asp-for="Input.Range" class="form-label">Tầm Hoạt Động (km)</label>
+                                <input asp-for="Input.Range" type="number" class="form-control" placeholder="VD: 500" />
+                            </div>
+                            
+                            <div class="col-md-4">
+                                <label asp-for="Input.ChargingTime" class="form-label">Thời Gian Sạc (giờ)</label>
+                                <input asp-for="Input.ChargingTime" type="number" step="0.1" class="form-control" placeholder="VD: 8.5" />
+                            </div>
+                            
+                            <div class="col-md-4">
+                                <label asp-for="Input.SeatingCapacity" class="form-label">Số Chỗ Ngồi</label>
+                                <input asp-for="Input.SeatingCapacity" type="number" class="form-control" placeholder="VD: 5" />
+                            </div>
+                            
+                            <div class="col-12">
+                                <label asp-for="Input.Features" class="form-label">Tính Năng (mỗi dòng một tính năng)</label>
+                                <textarea asp-for="Input.Features" class="form-control" rows="3" placeholder="Autopilot&#10;Premium Sound System&#10;Heated Seats"></textarea>
+                                <small class="text-muted">Nhập mỗi tính năng trên một dòng</small>
+                            </div>
+                            
+                            <div class="col-12">
+                                <label asp-for="Input.Images" class="form-label">Thêm Hình Ảnh Mới</label>
+                                <input asp-for="Input.Images" type="file" multiple accept="image/*" class="form-control" />
+                                <small class="text-muted">Chọn nhiều hình ảnh mới (JPG, PNG, GIF)</small>
+                            </div>
+                            
+                            <div class="col-12">
+                                <div class="form-check">
+                                    <input asp-for="Input.IsActive" class="form-check-input" />
+                                    <label asp-for="Input.IsActive" class="form-check-label">
+                                        Kích hoạt mẫu xe này
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="row mt-4">
+                            <div class="col-12">
+                                <button type="submit" class="btn btn-primary">
+                                    <i class="bi bi-check-circle"></i> Cập Nhật Mẫu Xe
+                                </button>
+                                <a href="/Vehicles" class="btn btn-outline-secondary ms-2">
+                                    <i class="bi bi-x-circle"></i> Hủy
+                                </a>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        
+        <div class="col-lg-4">
+            <div class="card">
+                <div class="card-header">
+                    <h6 class="mb-0">Hình Ảnh Hiện Tại</h6>
+                </div>
+                <div class="card-body">
+                    @if (Model.CurrentImages != null && Model.CurrentImages.Any())
+                    {
+                        <div class="row g-2">
+                            @foreach (var image in Model.CurrentImages)
+                            {
+                                <div class="col-6">
+                                    <img src="@image.ImageUrl" class="img-fluid rounded" alt="Vehicle Image" style="height: 100px; object-fit: cover; width: 100%;" />
+                                </div>
+                            }
+                        </div>
+                    }
+                    else
+                    {
+                        <p class="text-muted small">Chưa có hình ảnh</p>
+                    }
+                </div>
+            </div>
+            
+            <div class="card mt-3">
+                <div class="card-header">
+                    <h6 class="mb-0">Hướng Dẫn</h6>
+                </div>
+                <div class="card-body">
+                    <h6>Thông Tin Bắt Buộc:</h6>
+                    <ul class="small">
+                        <li><strong>Tên mẫu xe:</strong> Tên chính thức của xe</li>
+                        <li><strong>Mã mẫu xe:</strong> Mã duy nhất (VD: TM3)</li>
+                        <li><strong>Loại xe:</strong> Sedan, SUV, Hatchback...</li>
+                        <li><strong>Thương hiệu:</strong> Tesla, BMW, Audi...</li>
+                    </ul>
+                    
+                    <h6 class="mt-3">Lưu Ý:</h6>
+                    <ul class="small">
+                        <li>Hình ảnh mới sẽ được thêm vào danh sách hiện tại</li>
+                        <li>Để xóa hình ảnh, liên hệ quản trị viên</li>
+                        <li>Tất cả thay đổi sẽ được lưu ngay lập tức</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
