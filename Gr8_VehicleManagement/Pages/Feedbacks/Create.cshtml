@@ -1,0 +1,171 @@
+@page
+@model Gr8_VehicleManagement.Pages.Feedbacks.CreateModel
+@{
+    ViewData["Title"] = "Tạo Phản Hồi";
+}
+
+<div class="container-fluid">
+    <!-- Header -->
+    <div class="row mb-4">
+        <div class="col-md-6">
+            <h2 class="mb-0">
+                <i class="bi bi-plus-circle"></i> Tạo Phản Hồi
+            </h2>
+            <p class="text-muted">Gửi phản hồi hoặc khiếu nại về dịch vụ</p>
+        </div>
+        <div class="col-md-6 text-end">
+            <a href="/Feedbacks" class="btn btn-outline-secondary">
+                <i class="bi bi-arrow-left me-2"></i> Quay Lại
+            </a>
+        </div>
+    </div>
+
+    @if (!Model.CanCreate)
+    {
+        <div class="alert alert-warning">
+            <i class="bi bi-exclamation-triangle me-2"></i>
+            Bạn không có quyền tạo phản hồi.
+        </div>
+        return;
+    }
+
+    <!-- Create Form -->
+    <div class="row">
+        <div class="col-md-8">
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="mb-0">Thông Tin Phản Hồi</h5>
+                </div>
+                <div class="card-body">
+                    <form method="post" enctype="multipart/form-data">
+                        <div asp-validation-summary="ModelOnly" class="alert alert-danger"></div>
+
+                        <!-- Basic Information -->
+                        <div class="row mb-3">
+                            <div class="col-md-6">
+                                <label asp-for="Input.Title" class="form-label">Tiêu Đề <span class="text-danger">*</span></label>
+                                <input asp-for="Input.Title" class="form-control" placeholder="Ví dụ: Khiếu nại về dịch vụ" />
+                                <span asp-validation-for="Input.Title" class="text-danger"></span>
+                            </div>
+                            <div class="col-md-6">
+                                <label asp-for="Input.FeedbackType" class="form-label">Loại Phản Hồi <span class="text-danger">*</span></label>
+                                <select asp-for="Input.FeedbackType" class="form-select">
+                                    <option value="">-- Chọn loại phản hồi --</option>
+                                    <option value="Complaint">Khiếu nại</option>
+                                    <option value="Suggestion">Góp ý</option>
+                                    <option value="Question">Câu hỏi</option>
+                                </select>
+                                <span asp-validation-for="Input.FeedbackType" class="text-danger"></span>
+                            </div>
+                        </div>
+
+                        <div class="row mb-3">
+                            <div class="col-md-12">
+                                <label asp-for="Input.Description" class="form-label">Mô Tả Chi Tiết <span class="text-danger">*</span></label>
+                                <textarea asp-for="Input.Description" class="form-control" rows="5" placeholder="Mô tả chi tiết về vấn đề hoặc góp ý của bạn..."></textarea>
+                                <span asp-validation-for="Input.Description" class="text-danger"></span>
+                            </div>
+                        </div>
+
+                        <!-- Priority -->
+                        <div class="row mb-3">
+                            <div class="col-md-6">
+                                <label asp-for="Input.Priority" class="form-label">Mức Độ Ưu Tiên <span class="text-danger">*</span></label>
+                                <select asp-for="Input.Priority" class="form-select">
+                                    <option value="Low">Thấp</option>
+                                    <option value="Medium" selected>Trung bình</option>
+                                    <option value="High">Cao</option>
+                                    <option value="Critical">Khẩn cấp</option>
+                                </select>
+                                <span asp-validation-for="Input.Priority" class="text-danger"></span>
+                            </div>
+                            <div class="col-md-6">
+                                <label asp-for="Input.OrderId" class="form-label">Mã Đơn Hàng (Nếu có)</label>
+                                <input asp-for="Input.OrderId" class="form-control" placeholder="Nhập mã đơn hàng nếu liên quan" />
+                                <span asp-validation-for="Input.OrderId" class="text-danger"></span>
+                            </div>
+                        </div>
+
+                        <!-- Customer Information -->
+                        <div class="row mb-3">
+                            <div class="col-md-4">
+                                <label asp-for="Input.CustomerName" class="form-label">Tên Khách Hàng</label>
+                                <input asp-for="Input.CustomerName" class="form-control" placeholder="Tên của bạn" />
+                                <span asp-validation-for="Input.CustomerName" class="text-danger"></span>
+                            </div>
+                            <div class="col-md-4">
+                                <label asp-for="Input.CustomerEmail" class="form-label">Email</label>
+                                <input asp-for="Input.CustomerEmail" class="form-control" type="email" placeholder="email@example.com" />
+                                <span asp-validation-for="Input.CustomerEmail" class="text-danger"></span>
+                            </div>
+                            <div class="col-md-4">
+                                <label asp-for="Input.CustomerPhone" class="form-label">Số Điện Thoại</label>
+                                <input asp-for="Input.CustomerPhone" class="form-control" placeholder="0123456789" />
+                                <span asp-validation-for="Input.CustomerPhone" class="text-danger"></span>
+                            </div>
+                        </div>
+
+                        <!-- Additional Notes -->
+                        <div class="row mb-3">
+                            <div class="col-md-12">
+                                <label asp-for="Input.Notes" class="form-label">Ghi Chú Thêm</label>
+                                <textarea asp-for="Input.Notes" class="form-control" rows="3" placeholder="Thông tin bổ sung hoặc yêu cầu đặc biệt..."></textarea>
+                                <span asp-validation-for="Input.Notes" class="text-danger"></span>
+                            </div>
+                        </div>
+
+                        <!-- Submit Buttons -->
+                        <div class="row">
+                            <div class="col-md-12">
+                                <hr>
+                                <div class="d-flex justify-content-end gap-2">
+                                    <a href="/Feedbacks" class="btn btn-outline-secondary">
+                                        <i class="bi bi-x-circle me-2"></i> Hủy
+                                    </a>
+                                    <button type="submit" class="btn btn-primary">
+                                        <i class="bi bi-check-circle me-2"></i> Gửi Phản Hồi
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <!-- Help Panel -->
+        <div class="col-md-4">
+            <div class="card">
+                <div class="card-header">
+                    <h6 class="mb-0">
+                        <i class="bi bi-info-circle me-2"></i> Hướng Dẫn
+                    </h6>
+                </div>
+                <div class="card-body">
+                    <h6>Loại Phản Hồi:</h6>
+                    <ul class="list-unstyled">
+                        <li><strong>Khiếu nại:</strong> Vấn đề cần giải quyết</li>
+                        <li><strong>Góp ý:</strong> Đề xuất cải thiện</li>
+                        <li><strong>Câu hỏi:</strong> Thắc mắc cần trả lời</li>
+                    </ul>
+
+                    <h6>Mức Độ Ưu Tiên:</h6>
+                    <ul class="list-unstyled">
+                        <li><strong>Thấp:</strong> Vấn đề nhỏ, không khẩn cấp</li>
+                        <li><strong>Trung bình:</strong> Vấn đề thông thường</li>
+                        <li><strong>Cao:</strong> Vấn đề quan trọng</li>
+                        <li><strong>Khẩn cấp:</strong> Cần giải quyết ngay</li>
+                    </ul>
+
+                    <h6>Thời Gian Xử Lý:</h6>
+                    <ul class="list-unstyled">
+                        <li><strong>Khẩn cấp:</strong> 24 giờ</li>
+                        <li><strong>Cao:</strong> 2-3 ngày</li>
+                        <li><strong>Trung bình:</strong> 5-7 ngày</li>
+                        <li><strong>Thấp:</strong> 7-14 ngày</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

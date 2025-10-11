@@ -1,0 +1,122 @@
+@page
+@model Gr8_VehicleManagement.Pages.Account.ProfileModel
+@{
+    ViewData["Title"] = "Thông Tin Cá Nhân";
+}
+
+<div class="container mt-4">
+    <div class="row">
+        <div class="col-md-8">
+            <div class="card shadow">
+                <div class="card-header bg-primary text-white">
+                    <h4><i class="bi bi-person-circle me-2"></i>Thông Tin Cá Nhân</h4>
+                </div>
+                <div class="card-body">
+                    <form method="post">
+                        <div asp-validation-summary="ModelOnly" class="alert alert-danger" role="alert"></div>
+                        
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label asp-for="Input.FullName" class="form-label">Họ và Tên *</label>
+                                    <input asp-for="Input.FullName" class="form-control" />
+                                    <span asp-validation-for="Input.FullName" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label asp-for="Input.PhoneNumber" class="form-label">Số Điện Thoại *</label>
+                                    <input asp-for="Input.PhoneNumber" class="form-control" />
+                                    <span asp-validation-for="Input.PhoneNumber" class="text-danger"></span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label asp-for="Input.Email" class="form-label">Email</label>
+                                    <input asp-for="Input.Email" class="form-control" />
+                                    <span asp-validation-for="Input.Email" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label asp-for="Input.Username" class="form-label">Tên Đăng Nhập</label>
+                                    <input asp-for="Input.Username" class="form-control" readonly />
+                                    <small class="form-text text-muted">Tên đăng nhập không thể thay đổi</small>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="mb-3">
+                            <label asp-for="Input.Address" class="form-label">Địa Chỉ</label>
+                            <input asp-for="Input.Address" class="form-control" />
+                            <span asp-validation-for="Input.Address" class="text-danger"></span>
+                        </div>
+
+                        <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                            <button type="submit" class="btn btn-primary">
+                                <i class="bi bi-check-circle me-2"></i>Cập Nhật Thông Tin
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="card shadow">
+                <div class="card-header bg-warning text-dark">
+                    <h5><i class="bi bi-key me-2"></i>Đổi Mật Khẩu</h5>
+                </div>
+                <div class="card-body">
+                    <form method="post" asp-page-handler="ChangePassword">
+                        <div asp-validation-summary="All" class="alert alert-danger" role="alert"></div>
+                        
+                        <div class="mb-3">
+                            <label asp-for="PasswordInput.CurrentPassword" class="form-label">Mật Khẩu Hiện Tại *</label>
+                            <input asp-for="PasswordInput.CurrentPassword" type="password" class="form-control" />
+                            <span asp-validation-for="PasswordInput.CurrentPassword" class="text-danger"></span>
+                        </div>
+
+                        <div class="mb-3">
+                            <label asp-for="PasswordInput.NewPassword" class="form-label">Mật Khẩu Mới *</label>
+                            <input asp-for="PasswordInput.NewPassword" type="password" class="form-control" />
+                            <span asp-validation-for="PasswordInput.NewPassword" class="text-danger"></span>
+                        </div>
+
+                        <div class="mb-3">
+                            <label asp-for="PasswordInput.ConfirmPassword" class="form-label">Xác Nhận Mật Khẩu Mới *</label>
+                            <input asp-for="PasswordInput.ConfirmPassword" type="password" class="form-control" />
+                            <span asp-validation-for="PasswordInput.ConfirmPassword" class="text-danger"></span>
+                        </div>
+
+                        <div class="d-grid">
+                            <button type="submit" class="btn btn-warning">
+                                <i class="bi bi-key me-2"></i>Đổi Mật Khẩu
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <div class="card shadow mt-3">
+                <div class="card-header bg-info text-white">
+                    <h5><i class="bi bi-clock-history me-2"></i>Thông Tin Tài Khoản</h5>
+                </div>
+                <div class="card-body">
+                    <p><strong>Loại tài khoản:</strong> @Model.UserType</p>
+                    <p><strong>Ngày tạo:</strong> @Model.CreatedAt?.ToString("dd/MM/yyyy HH:mm")</p>
+                    <p><strong>Trạng thái:</strong> 
+                        <span class="badge bg-success">Hoạt động</span>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

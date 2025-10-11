@@ -1,0 +1,78 @@
+@page
+@using Gr8_VehicleManagement.Pages.Dashboard
+@model AdminModel
+@{
+    ViewData["Title"] = "EVM Staff Dashboard";
+}
+
+<div class="container-fluid mt-4">
+    <div class="row mb-4">
+        <div class="col">
+            <h1 class="display-5">
+                <i class="bi bi-briefcase"></i> EVM Staff Dashboard
+            </h1>
+            <p class="lead text-muted">Xin chào, <strong>@Model.CurrentUser?.FullName</strong> - Nhân viên Hãng!</p>
+        </div>
+    </div>
+
+    <!-- Same statistics as Admin -->
+    <div class="row mb-4">
+        <div class="col-md-3">
+            <div class="card text-white bg-primary">
+                <div class="card-body">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <div>
+                            <h6 class="card-title">Đại Lý</h6>
+                            <h2 class="mb-0">@Model.TotalDealers</h2>
+                        </div>
+                        <i class="bi bi-building" style="font-size: 3rem; opacity: 0.5;"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card text-white bg-success">
+                <div class="card-body">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <div>
+                            <h6 class="card-title">Mẫu Xe</h6>
+                            <h2 class="mb-0">@Model.TotalVehicleModels</h2>
+                        </div>
+                        <i class="bi bi-car-front" style="font-size: 3rem; opacity: 0.5;"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card text-white bg-info">
+                <div class="card-body">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <div>
+                            <h6 class="card-title">Đơn Hàng</h6>
+                            <h2 class="mb-0">@Model.TotalOrders</h2>
+                        </div>
+                        <i class="bi bi-cart" style="font-size: 3rem; opacity: 0.5;"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card text-white bg-warning">
+                <div class="card-body">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <div>
+                            <h6 class="card-title">Khách Hàng</h6>
+                            <h2 class="mb-0">@Model.TotalCustomers</h2>
+                        </div>
+                        <i class="bi bi-people" style="font-size: 3rem; opacity: 0.5;"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="alert alert-info">
+        <i class="bi bi-info-circle"></i> Bạn có quyền quản lý đại lý và xem báo cáo toàn hệ thống.
+    </div>
+</div>
+

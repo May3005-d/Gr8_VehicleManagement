@@ -1,0 +1,180 @@
+@page
+@model Gr8_VehicleManagement.Pages.Customers.IndexModel
+@{
+    ViewData["Title"] = "Danh Sách Khách Hàng";
+}
+
+<div class="container-fluid mt-4">
+    <div class="row mb-4">
+        <div class="col-md-6">
+            <h1 class="fade-in-up"><i class="bi bi-people me-2"></i> Danh Sách Khách Hàng</h1>
+        </div>
+        <div class="col-md-6 text-end">
+            @if (Model.CanCreate)
+            {
+                <a href="/Customers/Create" class="btn btn-primary btn-custom">
+                    <i class="bi bi-plus-circle me-2"></i> Thêm Khách Hàng
+                </a>
+            }
+        </div>
+    </div>
+
+    <!-- Search & Filters -->
+    <div class="card mb-4">
+        <div class="card-body">
+            <form method="get" class="row g-3">
+                <div class="col-md-3">
+                    <label class="form-label">Tìm kiếm</label>
+                    <input type="text" name="searchTerm" class="form-control" placeholder="Tên, SĐT, Email..." value="@Model.SearchTerm" />
+                </div>
+                <div class="col-md-2">
+                    <label class="form-label">Loại khách</label>
+                    <select name="customerType" class="form-select">
+                        <option value="">Tất cả</option>
+                        <option value="0" selected="@(Model.CustomerType == Gr8_VehicleManagement.Data.Enums.CustomerType.Individual)">Cá nhân</option>
+                        <option value="1" selected="@(Model.CustomerType == Gr8_VehicleManagement.Data.Enums.CustomerType.Corporate)">Doanh nghiệp</option>
+                    </select>
+                </div>
+                <div class="col-md-2">
+                    <label class="form-label">Thành phố</label>
+                    <select name="city" class="form-select">
+                        <option value="">Tất cả</option>
+                        @foreach (var city in Model.Cities)
+                        {
+                            <option value="@city" selected="@(Model.City == city)">@city</option>
+                        }
+                    </select>
+                </div>
+                <div class="col-md-3">
+                    <label class="form-label">Nhân viên phụ trách</label>
+                    <select name="assignedUserId" class="form-select">
+                        <option value="">Tất cả</option>
+                        @foreach (var sp in Model.Salespeople)
+                        {
+                            <option value="@sp.Id" selected="@(Model.AssignedUserId == sp.Id)">@sp.FullName</option>
+                        }
+                    </select>
+                </div>
+                <div class="col-md-2 d-flex align-items-end">
+                    <button type="submit" class="btn btn-primary w-100">
+                        <i class="bi bi-search"></i> Tìm
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Results Info -->
+    <div class="row mb-3">
+        <div class="col">
+            <p class="text-muted">
+                Hiển thị <strong>@Model.Customers.Count</strong> trong tổng số <strong>@Model.TotalCount</strong> khách hàng
+            </p>
+        </div>
+    </div>
+
+    <!-- Customer Table -->
+    <div class="card">
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-hover">
+                    <thead>
+                        <tr>
+                            <th>Mã KH</th>
+                            <th>Họ Tên</th>
+                            <th>SĐT</th>
+                            <th>Email</th>
+                            <th>Thành phố</th>
+                            <th>Loại</th>
+                            <th>NV Phụ trách</th>
+                            <th>Đơn hàng</th>
+                            <th>Tổng chi</th>
+                            <th>Ngày tạo</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var customer in Model.Customers)
+                        {
+                            <tr>
+                                <td><strong>@customer.Code</strong></td>
+                                <td>
+                                    <a href="/Customers/Details?id=@customer.Id" class="text-decoration-none">
+                                        @customer.FullName
+                                    </a>
+                                </td>
+                                <td>@customer.PhoneNumber</td>
+                                <td>@(customer.Email ?? "-")</td>
+                                <td>@(customer.City ?? "-")</td>
+                                <td>
+                                    @if (customer.CustomerType == Gr8_VehicleManagement.Data.Enums.CustomerType.Individual)
+                                    {
+                                        <span class="badge bg-info">Cá nhân</span>
+                                    }
+                                    else
+                                    {
+                                        <span class="badge bg-warning">Doanh nghiệp</span>
+                                    }
+                                </td>
+                                <td>@(customer.AssignedSalesperson ?? "-")</td>
+                                <td>@customer.TotalOrders đơn</td>
+                                <td><strong>@customer.TotalSpent.ToString("N0") VNĐ</strong></td>
+                                <td>@customer.CreatedAt.ToString("dd/MM/yyyy")</td>
+                                <td>
+                                    <a href="/Customers/Details?id=@customer.Id" class="btn btn-sm btn-outline-primary">
+                                        <i class="bi bi-eye"></i>
+                                    </a>
+                                    @if (Model.CanEdit)
+                                    {
+                                        <a href="/Customers/Edit?id=@customer.Id" class="btn btn-sm btn-outline-warning">
+                                            <i class="bi bi-pencil"></i>
+                                        </a>
+                                    }
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <!-- No Results -->
+    @if (Model.TotalCount == 0)
+    {
+        <div class="text-center py-5">
+            <i class="bi bi-inbox" style="font-size: 5rem; color: #ccc;"></i>
+            <p class="text-muted mt-3">Không tìm thấy khách hàng nào</p>
+        </div>
+    }
+
+    <!-- Pagination -->
+    @if (Model.TotalPages > 1)
+    {
+        <nav class="mt-4" aria-label="Page navigation">
+            <ul class="pagination justify-content-center">
+                <li class="page-item @(Model.HasPreviousPage ? "" : "disabled")">
+                    <a class="page-link" href="?pageNumber=@(Model.PageNumber - 1)&searchTerm=@Model.SearchTerm&customerType=@Model.CustomerType&city=@Model.City&assignedUserId=@Model.AssignedUserId">
+                        Trước
+                    </a>
+                </li>
+
+                @for (int i = Math.Max(1, Model.PageNumber - 2); i <= Math.Min(Model.TotalPages, Model.PageNumber + 2); i++)
+                {
+                    <li class="page-item @(i == Model.PageNumber ? "active" : "")">
+                        <a class="page-link" href="?pageNumber=@i&searchTerm=@Model.SearchTerm&customerType=@Model.CustomerType&city=@Model.City&assignedUserId=@Model.AssignedUserId">
+                            @i
+                        </a>
+                    </li>
+                }
+
+                <li class="page-item @(Model.HasNextPage ? "" : "disabled")">
+                    <a class="page-link" href="?pageNumber=@(Model.PageNumber + 1)&searchTerm=@Model.SearchTerm&customerType=@Model.CustomerType&city=@Model.City&assignedUserId=@Model.AssignedUserId">
+                        Sau
+                    </a>
+                </li>
+            </ul>
+        </nav>
+    }
+</div>
+

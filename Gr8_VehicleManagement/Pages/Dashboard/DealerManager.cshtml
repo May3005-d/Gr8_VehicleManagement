@@ -1,0 +1,49 @@
+@page
+@model Gr8_VehicleManagement.Pages.Dashboard.DealerManagerModel
+@{
+    ViewData["Title"] = "Dealer Manager Dashboard";
+}
+
+<div class="container-fluid mt-4">
+    <div class="row mb-4">
+        <div class="col">
+            <h1 class="display-5">
+                <i class="bi bi-person-badge"></i> Quản Lý Đại Lý
+            </h1>
+            <p class="lead text-muted">Xin chào, <strong>@Model.CurrentUser?.FullName</strong>!</p>
+            <p class="text-muted"><i class="bi bi-building"></i> Đại lý: <strong>@Model.CurrentUser?.FullName</strong></p>
+        </div>
+    </div>
+
+    <div class="row mb-4">
+        <div class="col-md-4">
+            <div class="card text-white bg-primary">
+                <div class="card-body">
+                    <h6 class="card-title">Đơn Hàng Tháng Này</h6>
+                    <h2 class="mb-0">@Model.MonthlyOrders</h2>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card text-white bg-success">
+                <div class="card-body">
+                    <h6 class="card-title">Xe Trong Kho</h6>
+                    <h2 class="mb-0">@Model.InventoryCount</h2>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card text-white bg-info">
+                <div class="card-body">
+                    <h6 class="card-title">Khách Hàng</h6>
+                    <h2 class="mb-0">@Model.TotalCustomers</h2>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="alert alert-success">
+        <i class="bi bi-check-circle"></i> Bạn có quyền quản lý nhân viên và xem báo cáo đại lý.
+    </div>
+</div>
+

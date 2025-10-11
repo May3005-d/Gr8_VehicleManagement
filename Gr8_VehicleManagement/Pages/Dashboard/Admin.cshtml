@@ -1,0 +1,127 @@
+@page
+@model Gr8_VehicleManagement.Pages.Dashboard.AdminModel
+@{
+    ViewData["Title"] = "Admin Dashboard";
+}
+
+<div class="container-fluid mt-4">
+    <div class="row mb-5">
+        <div class="col">
+            <h1 class="display-5 fade-in-up">
+                <i class="bi bi-speedometer2 me-3"></i> Admin Dashboard
+            </h1>
+            <p class="lead text-muted fade-in-up" style="animation-delay: 0.1s;">Xin chào, <strong>@Model.CurrentUser?.FullName</strong>!</p>
+        </div>
+    </div>
+
+    <!-- Statistics Cards -->
+    <div class="row mb-5 g-4">
+        <div class="col-md-3">
+            <div class="card text-white bg-primary shadow-custom fade-in-up" style="animation-delay: 0.2s;">
+                <div class="card-body">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <div>
+                            <h6 class="card-title">Tổng Đại Lý</h6>
+                            <h2 class="mb-0">@Model.TotalDealers</h2>
+                        </div>
+                        <i class="bi bi-building" style="font-size: 3rem; opacity: 0.5;"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card text-white bg-success shadow-custom fade-in-up" style="animation-delay: 0.3s;">
+                <div class="card-body">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <div>
+                            <h6 class="card-title">Tổng Mẫu Xe</h6>
+                            <h2 class="mb-0">@Model.TotalVehicleModels</h2>
+                        </div>
+                        <i class="bi bi-car-front" style="font-size: 3rem; opacity: 0.5;"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card text-white bg-info shadow-custom fade-in-up" style="animation-delay: 0.4s;">
+                <div class="card-body">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <div>
+                            <h6 class="card-title">Tổng Đơn Hàng</h6>
+                            <h2 class="mb-0">@Model.TotalOrders</h2>
+                        </div>
+                        <i class="bi bi-cart" style="font-size: 3rem; opacity: 0.5;"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card text-white bg-warning shadow-custom fade-in-up" style="animation-delay: 0.5s;">
+                <div class="card-body">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <div>
+                            <h6 class="card-title">Tổng Khách Hàng</h6>
+                            <h2 class="mb-0">@Model.TotalCustomers</h2>
+                        </div>
+                        <i class="bi bi-people" style="font-size: 3rem; opacity: 0.5;"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Quick Actions -->
+    <div class="row mb-4">
+        <div class="col">
+            <h4 class="fade-in-up"><i class="bi bi-lightning-charge me-2"></i> Quản Lý Nhanh</h4>
+        </div>
+    </div>
+
+    <div class="row g-4">
+        <div class="col-md-4">
+            <div class="card shadow-custom fade-in-up" style="animation-delay: 0.6s;">
+                <div class="card-body text-center">
+                    <i class="bi bi-building text-primary" style="font-size: 3rem;"></i>
+                    <h5 class="card-title mt-3">Quản Lý Đại Lý</h5>
+                    <p class="card-text">Thêm, sửa, xóa đại lý và theo dõi hiệu suất</p>
+                    <a href="/Customers" class="btn btn-primary btn-custom">Xem Khách Hàng</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card shadow-custom fade-in-up" style="animation-delay: 0.7s;">
+                <div class="card-body text-center">
+                    <i class="bi bi-car-front text-success" style="font-size: 3rem;"></i>
+                    <h5 class="card-title mt-3">Quản Lý Xe</h5>
+                    <p class="card-text">Quản lý mẫu xe, phiên bản và tồn kho</p>
+                    <a href="/Vehicles" class="btn btn-success btn-custom">Xem Xe</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card shadow-custom fade-in-up" style="animation-delay: 0.8s;">
+                <div class="card-body text-center">
+                    <i class="bi bi-graph-up text-info" style="font-size: 3rem;"></i>
+                    <h5 class="card-title mt-3">Báo Cáo</h5>
+                    <p class="card-text">Xem báo cáo doanh số và phân tích</p>
+                    <a href="/Orders" class="btn btn-info btn-custom text-white">Xem Đơn Hàng</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Recent Activity -->
+    <div class="row mt-5">
+        <div class="col">
+            <div class="card shadow-custom fade-in-up" style="animation-delay: 0.9s;">
+                <div class="card-header">
+                    <h5 class="mb-0"><i class="bi bi-clock-history me-2"></i> Hoạt Động Gần Đây</h5>
+                </div>
+                <div class="card-body">
+                    <p class="text-muted">Chức năng đang phát triển...</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

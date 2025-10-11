@@ -1,0 +1,65 @@
+@page
+@model Gr8_VehicleManagement.Pages.Dashboard.CustomerModel
+@{
+    ViewData["Title"] = "Customer Dashboard";
+}
+
+<div class="container-fluid mt-4">
+    <div class="row mb-4">
+        <div class="col">
+            <h1 class="display-5">
+                <i class="bi bi-person-circle"></i> Trang Cá Nhân
+            </h1>
+            <p class="lead text-muted">Xin chào, <strong>@Model.CurrentUser?.FullName</strong>!</p>
+        </div>
+    </div>
+
+    <div class="row mb-4">
+        <div class="col-md-4">
+            <div class="card">
+                <div class="card-body">
+                    <h6 class="text-muted">Đơn Hàng Của Tôi</h6>
+                    <h2>@Model.MyOrders</h2>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card">
+                <div class="card-body">
+                    <h6 class="text-muted">Xe Đã Mua</h6>
+                    <h2>@Model.PurchasedVehicles</h2>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card">
+                <div class="card-body">
+                    <h6 class="text-muted">Phản Hồi</h6>
+                    <h2>@Model.MyFeedbacks</h2>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row g-3">
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-body text-center">
+                    <i class="bi bi-car-front text-primary" style="font-size: 3rem;"></i>
+                    <h5 class="card-title mt-3">Xem Danh Mục Xe</h5>
+                    <a href="#" class="btn btn-primary">Xem Xe</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-body text-center">
+                    <i class="bi bi-receipt text-success" style="font-size: 3rem;"></i>
+                    <h5 class="card-title mt-3">Đơn Hàng Của Tôi</h5>
+                    <a href="#" class="btn btn-success">Xem Đơn</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

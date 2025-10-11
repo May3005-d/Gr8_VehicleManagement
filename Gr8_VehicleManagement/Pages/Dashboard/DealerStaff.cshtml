@@ -1,0 +1,68 @@
+@page
+@using Gr8_VehicleManagement.Pages.Dashboard
+@model DealerManagerModel
+@{
+    ViewData["Title"] = "Dealer Staff Dashboard";
+}
+
+<div class="container-fluid mt-4">
+    <div class="row mb-4">
+        <div class="col">
+            <h1 class="display-5">
+                <i class="bi bi-person"></i> Nhân Viên Đại Lý
+            </h1>
+            <p class="lead text-muted">Xin chào, <strong>@Model.CurrentUser?.FullName</strong>!</p>
+            <p class="text-muted"><i class="bi bi-building"></i> Đại lý: <strong>@Model.CurrentUser?.FullName</strong></p>
+        </div>
+    </div>
+
+    <div class="row mb-4">
+        <div class="col-md-6">
+            <div class="card text-white bg-primary">
+                <div class="card-body">
+                    <h6 class="card-title">Đơn Hàng Tháng Này</h6>
+                    <h2 class="mb-0">@Model.MonthlyOrders</h2>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="card text-white bg-success">
+                <div class="card-body">
+                    <h6 class="card-title">Khách Hàng Của Tôi</h6>
+                    <h2 class="mb-0">@Model.TotalCustomers</h2>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row g-3">
+        <div class="col-md-4">
+            <div class="card">
+                <div class="card-body text-center">
+                    <i class="bi bi-person-plus text-primary" style="font-size: 3rem;"></i>
+                    <h5 class="card-title mt-3">Thêm Khách Hàng</h5>
+                    <a href="#" class="btn btn-primary">Thêm</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card">
+                <div class="card-body text-center">
+                    <i class="bi bi-cart-plus text-success" style="font-size: 3rem;"></i>
+                    <h5 class="card-title mt-3">Tạo Đơn Hàng</h5>
+                    <a href="#" class="btn btn-success">Tạo</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card">
+                <div class="card-body text-center">
+                    <i class="bi bi-car-front text-info" style="font-size: 3rem;"></i>
+                    <h5 class="card-title mt-3">Xem Xe</h5>
+                    <a href="#" class="btn btn-info text-white">Xem</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
