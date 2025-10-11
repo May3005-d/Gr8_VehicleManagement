@@ -1,0 +1,212 @@
+@page
+@model Gr8_VehicleManagement.Pages.Orders.IndexModel
+@{
+    ViewData["Title"] = "Danh Sách Đơn Hàng";
+}
+
+<div class="container-fluid mt-4">
+    <div class="row mb-4">
+        <div class="col-md-6">
+            <h1 class="fade-in-up"><i class="bi bi-cart me-2"></i> Danh Sách Đơn Hàng</h1>
+        </div>
+        <div class="col-md-6 text-end">
+            @if (Model.CanCreate)
+            {
+                <a href="/Orders/Create" class="btn btn-primary btn-custom">
+                    <i class="bi bi-plus-circle me-2"></i> Tạo Đơn Hàng
+                </a>
+            }
+        </div>
+    </div>
+
+    <!-- Search & Filters -->
+    <div class="card mb-4">
+        <div class="card-body">
+            <form method="get" class="row g-3">
+                <div class="col-md-3">
+                    <label class="form-label">Tìm kiếm</label>
+                    <input type="text" name="searchTerm" class="form-control" placeholder="Mã đơn, tên KH, SĐT..." value="@Model.SearchTerm" />
+                </div>
+                <div class="col-md-2">
+                    <label class="form-label">Trạng thái</label>
+                    <select name="status" class="form-select">
+                        <option value="">Tất cả</option>
+                        <option value="1" selected="@(Model.Status == Gr8_VehicleManagement.Data.Enums.OrderStatus.Draft)">Chờ xử lý</option>
+                        <option value="2" selected="@(Model.Status == Gr8_VehicleManagement.Data.Enums.OrderStatus.Confirmed)">Đã xác nhận</option>
+                        <option value="3" selected="@(Model.Status == Gr8_VehicleManagement.Data.Enums.OrderStatus.Processing)">Đang xử lý</option>
+                        <option value="4" selected="@(Model.Status == Gr8_VehicleManagement.Data.Enums.OrderStatus.Delivered)">Đã giao</option>
+                        <option value="5" selected="@(Model.Status == Gr8_VehicleManagement.Data.Enums.OrderStatus.Cancelled)">Đã hủy</option>
+                    </select>
+                </div>
+                <div class="col-md-2">
+                    <label class="form-label">TT Thanh toán</label>
+                    <select name="paymentStatus" class="form-select">
+                        <option value="">Tất cả</option>
+                        <option value="0" selected="@(Model.PaymentStatus == Gr8_VehicleManagement.Data.Enums.PaymentStatus.Pending)">Chờ thanh toán</option>
+                        <option value="2" selected="@(Model.PaymentStatus == Gr8_VehicleManagement.Data.Enums.PaymentStatus.PartiallyPaid)">Thanh toán một phần</option>
+                        <option value="3" selected="@(Model.PaymentStatus == Gr8_VehicleManagement.Data.Enums.PaymentStatus.PaidInFull)">Đã thanh toán</option>
+                        <option value="4" selected="@(Model.PaymentStatus == Gr8_VehicleManagement.Data.Enums.PaymentStatus.Refunded)">Đã hoàn tiền</option>
+                    </select>
+                </div>
+                <div class="col-md-2">
+                    <label class="form-label">Từ ngày</label>
+                    <input type="date" name="fromDate" class="form-control" value="@Model.FromDate?.ToString("yyyy-MM-dd")" />
+                </div>
+                <div class="col-md-2">
+                    <label class="form-label">Đến ngày</label>
+                    <input type="date" name="toDate" class="form-control" value="@Model.ToDate?.ToString("yyyy-MM-dd")" />
+                </div>
+                <div class="col-md-1 d-flex align-items-end">
+                    <button type="submit" class="btn btn-primary w-100">
+                        <i class="bi bi-search"></i>
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Results Info -->
+    <div class="row mb-3">
+        <div class="col">
+            <p class="text-muted">
+                Hiển thị <strong>@Model.Orders.Count</strong> trong tổng số <strong>@Model.TotalCount</strong> đơn hàng
+            </p>
+        </div>
+    </div>
+
+    <!-- Orders Table -->
+    <div class="card">
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-hover">
+                    <thead>
+                        <tr>
+                            <th>Mã ĐH</th>
+                            <th>Ngày đặt</th>
+                            <th>Khách hàng</th>
+                            <th>Xe</th>
+                            <th>Tổng tiền</th>
+                            <th>Trạng thái</th>
+                            <th>TT Thanh toán</th>
+                            <th>Dự kiến giao</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var order in Model.Orders)
+                        {
+                            <tr>
+                                <td><strong>@order.OrderCode</strong></td>
+                                <td>@order.OrderDate.ToString("dd/MM/yyyy")</td>
+                                <td>
+                                    <div>
+                                        <strong>@order.CustomerName</strong><br />
+                                        <small class="text-muted">@order.CustomerPhone</small>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div>
+                                        <strong>@order.VehicleName</strong><br />
+                                        <small class="text-muted">@order.VehicleColor</small>
+                                    </div>
+                                </td>
+                                <td>
+                                    <strong>@order.TotalAmount.ToString("N0") VNĐ</strong><br />
+                                    <small class="text-muted">Cọc: @order.DepositAmount.ToString("N0") VNĐ</small>
+                                </td>
+                                <td>
+                                    @switch (order.Status)
+                                    {
+                                        case Gr8_VehicleManagement.Data.Enums.OrderStatus.Draft:
+                                            <span class="badge bg-warning">Chờ xử lý</span>
+                                            break;
+                                        case Gr8_VehicleManagement.Data.Enums.OrderStatus.Confirmed:
+                                            <span class="badge bg-info">Đã xác nhận</span>
+                                            break;
+                                        case Gr8_VehicleManagement.Data.Enums.OrderStatus.Processing:
+                                            <span class="badge bg-primary">Đang xử lý</span>
+                                            break;
+                                        case Gr8_VehicleManagement.Data.Enums.OrderStatus.Delivered:
+                                            <span class="badge bg-success">Đã giao</span>
+                                            break;
+                                        case Gr8_VehicleManagement.Data.Enums.OrderStatus.Cancelled:
+                                            <span class="badge bg-danger">Đã hủy</span>
+                                            break;
+                                    }
+                                </td>
+                                <td>
+                                    @switch (order.PaymentStatus)
+                                    {
+                                        case Gr8_VehicleManagement.Data.Enums.PaymentStatus.Pending:
+                                            <span class="badge bg-warning">Chờ TT</span>
+                                            break;
+                                        case Gr8_VehicleManagement.Data.Enums.PaymentStatus.PartiallyPaid:
+                                            <span class="badge bg-info">TT một phần</span>
+                                            break;
+                                        case Gr8_VehicleManagement.Data.Enums.PaymentStatus.PaidInFull:
+                                            <span class="badge bg-success">Đã TT</span>
+                                            break;
+                                        case Gr8_VehicleManagement.Data.Enums.PaymentStatus.Refunded:
+                                            <span class="badge bg-danger">Đã hoàn</span>
+                                            break;
+                                    }
+                                </td>
+                                <td>@(order.ExpectedDeliveryDate?.ToString("dd/MM/yyyy") ?? "-")</td>
+                                <td>
+                                    <a href="/Orders/Details?id=@order.Id" class="btn btn-sm btn-outline-primary">
+                                        <i class="bi bi-eye"></i>
+                                    </a>
+                                    @if (Model.CanEdit)
+                                    {
+                                        <a href="/Orders/Edit?id=@order.Id" class="btn btn-sm btn-outline-warning">
+                                            <i class="bi bi-pencil"></i>
+                                        </a>
+                                    }
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <!-- No Results -->
+    @if (Model.TotalCount == 0)
+    {
+        <div class="text-center py-5">
+            <i class="bi bi-inbox" style="font-size: 5rem; color: #ccc;"></i>
+            <p class="text-muted mt-3">Không tìm thấy đơn hàng nào</p>
+        </div>
+    }
+
+    <!-- Pagination -->
+    @if (Model.TotalPages > 1)
+    {
+        <nav class="mt-4" aria-label="Page navigation">
+            <ul class="pagination justify-content-center">
+                <li class="page-item @(Model.HasPreviousPage ? "" : "disabled")">
+                    <a class="page-link" href="?pageNumber=@(Model.PageNumber - 1)&searchTerm=@Model.SearchTerm&status=@Model.Status&paymentStatus=@Model.PaymentStatus&fromDate=@Model.FromDate?.ToString("yyyy-MM-dd")&toDate=@Model.ToDate?.ToString("yyyy-MM-dd")">
+                        Trước
+                    </a>
+                </li>
+
+                @for (int i = Math.Max(1, Model.PageNumber - 2); i <= Math.Min(Model.TotalPages, Model.PageNumber + 2); i++)
+                {
+                    <li class="page-item @(i == Model.PageNumber ? "active" : "")">
+                        <a class="page-link" href="?pageNumber=@i&searchTerm=@Model.SearchTerm&status=@Model.Status&paymentStatus=@Model.PaymentStatus&fromDate=@Model.FromDate?.ToString("yyyy-MM-dd")&toDate=@Model.ToDate?.ToString("yyyy-MM-dd")">
+                            @i
+                        </a>
+                    </li>
+                }
+
+                <li class="page-item @(Model.HasNextPage ? "" : "disabled")">
+                    <a class="page-link" href="?pageNumber=@(Model.PageNumber + 1)&searchTerm=@Model.SearchTerm&status=@Model.Status&paymentStatus=@Model.PaymentStatus&fromDate=@Model.FromDate?.ToString("yyyy-MM-dd")&toDate=@Model.ToDate?.ToString("yyyy-MM-dd")">
+                        Sau
+                    </a>
+                </li>
+            </ul>
+        </nav>
+    }
+</div>
+

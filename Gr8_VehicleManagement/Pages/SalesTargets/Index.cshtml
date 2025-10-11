@@ -1,0 +1,289 @@
+@page
+@model Gr8_VehicleManagement.Pages.SalesTargets.IndexModel
+@{
+    ViewData["Title"] = "Chỉ Tiêu Bán Hàng";
+}
+
+<div class="container-fluid">
+    <!-- Header -->
+    <div class="row mb-4">
+        <div class="col-md-6">
+            <h2 class="mb-0">
+                <i class="bi bi-target"></i> Chỉ Tiêu Bán Hàng
+            </h2>
+            <p class="text-muted">Quản lý chỉ tiêu và hoa hồng bán hàng</p>
+        </div>
+        <div class="col-md-6 text-end">
+            @if (Model.CanCreate)
+            {
+                <a href="/SalesTargets/Create" class="btn btn-primary btn-custom">
+                    <i class="bi bi-plus-circle me-2"></i> Tạo Chỉ Tiêu Mới
+                </a>
+            }
+        </div>
+    </div>
+
+    <!-- Statistics Cards -->
+    <div class="row mb-4">
+        <div class="col-md-3">
+            <div class="card bg-primary text-white">
+                <div class="card-body">
+                    <div class="d-flex justify-content-between">
+                        <div>
+                            <h4 class="card-title">@Model.TotalTargets</h4>
+                            <p class="card-text">Tổng Chỉ Tiêu</p>
+                        </div>
+                        <div class="align-self-center">
+                            <i class="bi bi-target fs-1"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card bg-success text-white">
+                <div class="card-body">
+                    <div class="d-flex justify-content-between">
+                        <div>
+                            <h4 class="card-title">@Model.ActiveTargets</h4>
+                            <p class="card-text">Chỉ Tiêu Hoạt Động</p>
+                        </div>
+                        <div class="align-self-center">
+                            <i class="bi bi-check-circle fs-1"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card bg-info text-white">
+                <div class="card-body">
+                    <div class="d-flex justify-content-between">
+                        <div>
+                            <h4 class="card-title">@Model.TotalCommission.ToString("N0") VNĐ</h4>
+                            <p class="card-text">Tổng Hoa Hồng</p>
+                        </div>
+                        <div class="align-self-center">
+                            <i class="bi bi-currency-dollar fs-1"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card bg-warning text-white">
+                <div class="card-body">
+                    <div class="d-flex justify-content-between">
+                        <div>
+                            <h4 class="card-title">@Model.AverageAchievement.ToString("F1")%</h4>
+                            <p class="card-text">Tỷ Lệ Hoàn Thành TB</p>
+                        </div>
+                        <div class="align-self-center">
+                            <i class="bi bi-graph-up fs-1"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Search and Filter -->
+    <div class="card mb-4">
+        <div class="card-body">
+            <form method="get" class="row g-3">
+                <div class="col-md-3">
+                    <label class="form-label">Tìm kiếm</label>
+                    <input type="text" class="form-control" name="searchTerm" value="@Model.SearchTerm" placeholder="Tên chỉ tiêu...">
+                </div>
+                <div class="col-md-2">
+                    <label class="form-label">Loại chỉ tiêu</label>
+                    <select class="form-select" name="targetFor">
+                        <option value="">Tất cả</option>
+                        <option value="Dealer" selected="@(Model.TargetFor == "Dealer")">Đại lý</option>
+                        <option value="Staff" selected="@(Model.TargetFor == "Staff")">Nhân viên</option>
+                    </select>
+                </div>
+                <div class="col-md-2">
+                    <label class="form-label">Trạng thái</label>
+                    <select class="form-select" name="isActive">
+                        <option value="">Tất cả</option>
+                        <option value="true" selected="@(Model.IsActive == true)">Hoạt động</option>
+                        <option value="false" selected="@(Model.IsActive == false)">Không hoạt động</option>
+                    </select>
+                </div>
+                <div class="col-md-2">
+                    <label class="form-label">Từ ngày</label>
+                    <input type="date" class="form-control" name="startDate" value="@Model.StartDate?.ToString("yyyy-MM-dd")">
+                </div>
+                <div class="col-md-2">
+                    <label class="form-label">Đến ngày</label>
+                    <input type="date" class="form-control" name="endDate" value="@Model.EndDate?.ToString("yyyy-MM-dd")">
+                </div>
+                <div class="col-md-1">
+                    <label class="form-label">&nbsp;</label>
+                    <button type="submit" class="btn btn-outline-primary d-block w-100">
+                        <i class="bi bi-search"></i>
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Sales Targets Table -->
+    <div class="card">
+        <div class="card-header">
+            <h5 class="mb-0">Danh Sách Chỉ Tiêu Bán Hàng</h5>
+        </div>
+        <div class="card-body">
+            @if (Model.SalesTargets.Any())
+            {
+                <div class="table-responsive">
+                    <table class="table table-hover">
+                        <thead>
+                            <tr>
+                                <th>Tên Chỉ Tiêu</th>
+                                <th>Loại</th>
+                                <th>Đối Tượng</th>
+                                <th>Chỉ Tiêu</th>
+                                <th>Thành Tích</th>
+                                <th>Tỷ Lệ</th>
+                                <th>Hoa Hồng</th>
+                                <th>Trạng Thái</th>
+                                <th>Thời Gian</th>
+                                <th>Thao Tác</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var target in Model.SalesTargets)
+                            {
+                                <tr>
+                                    <td>
+                                        <div>
+                                            <strong>@target.Name</strong>
+                                            @if (!string.IsNullOrEmpty(target.Description))
+                                            {
+                                                <br><small class="text-muted">@target.Description</small>
+                                            }
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <span class="badge bg-@(target.TargetFor.ToString() == "Dealer" ? "primary" : "info")">
+                                            @target.TargetForDisplay
+                                        </span>
+                                    </td>
+                                    <td>
+                                        @if (target.TargetFor.ToString() == "Dealer")
+                                        {
+                                            <span>@target.DealerName</span>
+                                        }
+                                        else
+                                        {
+                                            <span>@target.UserName</span>
+                                        }
+                                    </td>
+                                    <td>
+                                        <div>
+                                            <strong>@target.TargetAmount.ToString("N0") VNĐ</strong>
+                                            <br><small class="text-muted">@target.TargetQuantity xe</small>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div>
+                                            <strong>@target.AchievementAmount.ToString("N0") VNĐ</strong>
+                                            <br><small class="text-muted">@target.AchievementQuantity xe</small>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="progress" style="height: 20px;">
+                                            <div class="progress-bar @(target.AchievementPercentage >= 100 ? "bg-success" : target.AchievementPercentage >= 80 ? "bg-warning" : "bg-danger")" 
+                                                 role="progressbar" 
+                                                 style="width: @(Math.Min(target.AchievementPercentage, 100))%"
+                                                 aria-valuenow="@target.AchievementPercentage" 
+                                                 aria-valuemin="0" 
+                                                 aria-valuemax="100">
+                                                @target.AchievementPercentage.ToString("F1")%
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div>
+                                            <strong>@target.CommissionEarned.ToString("N0") VNĐ</strong>
+                                            <br><small class="text-muted">@target.CommissionRate%</small>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <span class="badge bg-@(target.IsActive ? "success" : "secondary")">
+                                            @(target.IsActive ? "Hoạt động" : "Không hoạt động")
+                                        </span>
+                                    </td>
+                                    <td>
+                                        <div>
+                                            <small>@target.StartDate.ToString("dd/MM/yyyy")</small>
+                                            <br><small>@target.EndDate.ToString("dd/MM/yyyy")</small>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="btn-group" role="group">
+                                            <a href="/SalesTargets/Details?id=@target.Id" class="btn btn-sm btn-outline-primary">
+                                                <i class="bi bi-eye"></i>
+                                            </a>
+                                            @if (Model.CanEdit)
+                                            {
+                                                <a href="/SalesTargets/Edit?id=@target.Id" class="btn btn-sm btn-outline-secondary">
+                                                    <i class="bi bi-pencil"></i>
+                                                </a>
+                                            }
+                                        </div>
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- Pagination -->
+                @if (Model.TotalPages > 1)
+                {
+                    <nav aria-label="Sales targets pagination">
+                        <ul class="pagination justify-content-center">
+                            @if (Model.CurrentPage > 1)
+                            {
+                                <li class="page-item">
+                                    <a class="page-link" href="?pageNumber=@(Model.CurrentPage - 1)&searchTerm=@Model.SearchTerm&targetFor=@Model.TargetFor&isActive=@Model.IsActive&startDate=@Model.StartDate?.ToString("yyyy-MM-dd")&endDate=@Model.EndDate?.ToString("yyyy-MM-dd")">Trước</a>
+                                </li>
+                            }
+                            
+                            @for (int i = Math.Max(1, Model.CurrentPage - 2); i <= Math.Min(Model.TotalPages, Model.CurrentPage + 2); i++)
+                            {
+                                <li class="page-item @(i == Model.CurrentPage ? "active" : "")">
+                                    <a class="page-link" href="?pageNumber=@i&searchTerm=@Model.SearchTerm&targetFor=@Model.TargetFor&isActive=@Model.IsActive&startDate=@Model.StartDate?.ToString("yyyy-MM-dd")&endDate=@Model.EndDate?.ToString("yyyy-MM-dd")">@i</a>
+                                </li>
+                            }
+                            
+                            @if (Model.CurrentPage < Model.TotalPages)
+                            {
+                                <li class="page-item">
+                                    <a class="page-link" href="?pageNumber=@(Model.CurrentPage + 1)&searchTerm=@Model.SearchTerm&targetFor=@Model.TargetFor&isActive=@Model.IsActive&startDate=@Model.StartDate?.ToString("yyyy-MM-dd")&endDate=@Model.EndDate?.ToString("yyyy-MM-dd")">Sau</a>
+                                </li>
+                            }
+                        </ul>
+                    </nav>
+                }
+            }
+            else
+            {
+                <div class="text-center py-5">
+                    <i class="bi bi-target fs-1 text-muted"></i>
+                    <h5 class="text-muted mt-3">Chưa có chỉ tiêu bán hàng nào</h5>
+                    <p class="text-muted">Hãy tạo chỉ tiêu đầu tiên để bắt đầu theo dõi thành tích bán hàng.</p>
+                    @if (Model.CanCreate)
+                    {
+                        <a href="/SalesTargets/Create" class="btn btn-primary">
+                            <i class="bi bi-plus-circle me-2"></i> Tạo Chỉ Tiêu Đầu Tiên
+                        </a>
+                    }
+                </div>
+            }
+        </div>
+    </div>
+</div>

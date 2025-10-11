@@ -1,0 +1,212 @@
+@page
+@model Gr8_VehicleManagement.Pages.Orders.EditModel
+@{
+    ViewData["Title"] = "Sửa Đơn Hàng";
+}
+
+<div class="container-fluid mt-4">
+    @if (Model.Order == null)
+    {
+        <div class="alert alert-danger">
+            <i class="bi bi-exclamation-triangle"></i> Không tìm thấy đơn hàng
+        </div>
+        <a href="/Orders" class="btn btn-secondary">Quay lại danh sách</a>
+        return;
+    }
+
+    <!-- Breadcrumb -->
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="/">Home</a></li>
+            <li class="breadcrumb-item"><a href="/Orders">Đơn hàng</a></li>
+            <li class="breadcrumb-item"><a href="/Orders/Details?id=@Model.Order.Id">@Model.Order.OrderCode</a></li>
+            <li class="breadcrumb-item active">Sửa</li>
+        </ol>
+    </nav>
+
+    <!-- Header -->
+    <div class="row mb-4">
+        <div class="col-md-8">
+            <h1><i class="bi bi-pencil"></i> Sửa Đơn Hàng @Model.Order.OrderCode</h1>
+            <p class="lead text-muted">
+                Cập nhật trạng thái và thông tin đơn hàng
+            </p>
+        </div>
+        <div class="col-md-4 text-end">
+            <a href="/Orders/Details?id=@Model.Order.Id" class="btn btn-secondary">
+                <i class="bi bi-arrow-left"></i> Quay lại
+            </a>
+        </div>
+    </div>
+
+    <form method="post">
+        <input type="hidden" asp-for="Input.Id" />
+        
+        <div class="row">
+            <!-- Order Status -->
+            <div class="col-md-6 mb-4">
+                <div class="card h-100">
+                    <div class="card-header bg-primary text-white">
+                        <h5 class="mb-0"><i class="bi bi-gear"></i> Trạng Thái Đơn Hàng</h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="mb-3">
+                            <label class="form-label">Trạng thái hiện tại</label>
+                            <div class="alert alert-info">
+                                @switch (Model.Order.Status)
+                                {
+                                    case Gr8_VehicleManagement.Data.Enums.OrderStatus.Draft:
+                                        <span class="badge bg-warning">Chờ xử lý</span>
+                                        break;
+                                    case Gr8_VehicleManagement.Data.Enums.OrderStatus.Confirmed:
+                                        <span class="badge bg-info">Đã xác nhận</span>
+                                        break;
+                                    case Gr8_VehicleManagement.Data.Enums.OrderStatus.Processing:
+                                        <span class="badge bg-primary">Đang xử lý</span>
+                                        break;
+                                    case Gr8_VehicleManagement.Data.Enums.OrderStatus.Delivered:
+                                        <span class="badge bg-success">Đã giao</span>
+                                        break;
+                                    case Gr8_VehicleManagement.Data.Enums.OrderStatus.Cancelled:
+                                        <span class="badge bg-danger">Đã hủy</span>
+                                        break;
+                                }
+                            </div>
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label">Cập nhật trạng thái</label>
+                            <select asp-for="Input.Status" class="form-select">
+                                <option value="1" selected="@(Model.Order.Status == Gr8_VehicleManagement.Data.Enums.OrderStatus.Draft)">Chờ xử lý</option>
+                                <option value="2" selected="@(Model.Order.Status == Gr8_VehicleManagement.Data.Enums.OrderStatus.Confirmed)">Đã xác nhận</option>
+                                <option value="3" selected="@(Model.Order.Status == Gr8_VehicleManagement.Data.Enums.OrderStatus.Processing)">Đang xử lý</option>
+                                <option value="4" selected="@(Model.Order.Status == Gr8_VehicleManagement.Data.Enums.OrderStatus.Delivered)">Đã giao</option>
+                                <option value="5" selected="@(Model.Order.Status == Gr8_VehicleManagement.Data.Enums.OrderStatus.Cancelled)">Đã hủy</option>
+                            </select>
+                            <span asp-validation-for="Input.Status" class="text-danger"></span>
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label">Trạng thái thanh toán</label>
+                            <select asp-for="Input.PaymentStatus" class="form-select">
+                                <option value="1" selected="@(Model.Order.PaymentStatus == Gr8_VehicleManagement.Data.Enums.PaymentStatus.Pending)">Chờ thanh toán</option>
+                                <option value="2" selected="@(Model.Order.PaymentStatus == Gr8_VehicleManagement.Data.Enums.PaymentStatus.PartiallyPaid)">Thanh toán một phần</option>
+                                <option value="3" selected="@(Model.Order.PaymentStatus == Gr8_VehicleManagement.Data.Enums.PaymentStatus.PaidInFull)">Đã thanh toán</option>
+                                <option value="4" selected="@(Model.Order.PaymentStatus == Gr8_VehicleManagement.Data.Enums.PaymentStatus.Refunded)">Đã hoàn tiền</option>
+                            </select>
+                            <span asp-validation-for="Input.PaymentStatus" class="text-danger"></span>
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label">Dự kiến giao hàng</label>
+                            <input asp-for="Input.ExpectedDeliveryDate" type="date" class="form-control" />
+                            <span asp-validation-for="Input.ExpectedDeliveryDate" class="text-danger"></span>
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label">Thực tế giao hàng</label>
+                            <input asp-for="Input.ActualDeliveryDate" type="date" class="form-control" />
+                            <span asp-validation-for="Input.ActualDeliveryDate" class="text-danger"></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Contract & Delivery -->
+            <div class="col-md-6 mb-4">
+                <div class="card h-100">
+                    <div class="card-header bg-info text-white">
+                        <h5 class="mb-0"><i class="bi bi-file-text"></i> Hợp Đồng & Giao Hàng</h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="mb-3">
+                            <label class="form-label">Số hợp đồng</label>
+                            <input asp-for="Input.ContractNumber" class="form-control" placeholder="VD: HD2024001" />
+                            <span asp-validation-for="Input.ContractNumber" class="text-danger"></span>
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label">Ngày ký hợp đồng</label>
+                            <input asp-for="Input.ContractSignedAt" type="datetime-local" class="form-control" />
+                            <span asp-validation-for="Input.ContractSignedAt" class="text-danger"></span>
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label">Ngày giao hàng</label>
+                            <input asp-for="Input.DeliveredAt" type="datetime-local" class="form-control" />
+                            <span asp-validation-for="Input.DeliveredAt" class="text-danger"></span>
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label">Ghi chú giao hàng</label>
+                            <textarea asp-for="Input.DeliveryNotes" class="form-control" rows="3" placeholder="Ghi chú về quá trình giao hàng..."></textarea>
+                            <span asp-validation-for="Input.DeliveryNotes" class="text-danger"></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Cancellation (if applicable) -->
+        <div class="card mb-4" id="cancellationSection" style="display: none;">
+            <div class="card-header bg-danger text-white">
+                <h5 class="mb-0"><i class="bi bi-x-circle"></i> Hủy Đơn Hàng</h5>
+            </div>
+            <div class="card-body">
+                <div class="mb-3">
+                    <label class="form-label">Lý do hủy</label>
+                    <textarea asp-for="Input.CancellationReason" class="form-control" rows="3" placeholder="Nhập lý do hủy đơn hàng..."></textarea>
+                    <span asp-validation-for="Input.CancellationReason" class="text-danger"></span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Notes -->
+        <div class="card mb-4">
+            <div class="card-header">
+                <h5 class="mb-0"><i class="bi bi-sticky"></i> Ghi Chú</h5>
+            </div>
+            <div class="card-body">
+                <div class="mb-3">
+                    <label class="form-label">Ghi chú nội bộ</label>
+                    <textarea asp-for="Input.Notes" class="form-control" rows="4" placeholder="Ghi chú về đơn hàng..."></textarea>
+                    <span asp-validation-for="Input.Notes" class="text-danger"></span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Submit Buttons -->
+        <div class="row">
+            <div class="col-12 text-end">
+                <a href="/Orders/Details?id=@Model.Order.Id" class="btn btn-secondary me-2">
+                    <i class="bi bi-x-circle"></i> Hủy
+                </a>
+                <button type="submit" class="btn btn-primary">
+                    <i class="bi bi-check-circle"></i> Cập Nhật
+                </button>
+            </div>
+        </div>
+    </form>
+</div>
+
+@section Scripts {
+    <script>
+        // Show/hide cancellation section based on status
+        document.querySelector('select[name="Input.Status"]').addEventListener('change', function() {
+            const cancellationSection = document.getElementById('cancellationSection');
+            if (this.value === '5') { // Cancelled
+                cancellationSection.style.display = 'block';
+            } else {
+                cancellationSection.style.display = 'none';
+            }
+        });
+
+        // Initialize on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            const statusSelect = document.querySelector('select[name="Input.Status"]');
+            if (statusSelect.value === '5') {
+                document.getElementById('cancellationSection').style.display = 'block';
+            }
+        });
+    </script>
+}

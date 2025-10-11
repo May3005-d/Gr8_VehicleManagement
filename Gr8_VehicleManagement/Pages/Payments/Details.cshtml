@@ -1,0 +1,304 @@
+@page
+@model Gr8_VehicleManagement.Pages.Payments.DetailsModel
+@{
+    ViewData["Title"] = "Chi Tiết Thanh Toán";
+}
+
+<div class="container-fluid mt-4">
+    <div class="row mb-4">
+        <div class="col-md-6">
+            <h1><i class="bi bi-credit-card"></i> Chi Tiết Thanh Toán</h1>
+        </div>
+        <div class="col-md-6 text-end">
+            <a href="/Payments/Index" class="btn btn-secondary">
+                <i class="bi bi-arrow-left"></i> Quay lại
+            </a>
+            @if (Model.CanEdit && Model.Payment != null)
+            {
+                <a href="/Payments/Edit?id=@Model.Payment.Id" class="btn btn-warning">
+                    <i class="bi bi-pencil"></i> Chỉnh sửa
+                </a>
+            }
+        </div>
+    </div>
+
+    @if (Model.Payment != null)
+    {
+        <!-- Payment Info Card -->
+        <div class="row mb-4">
+            <div class="col-md-8">
+                <div class="card">
+                    <div class="card-header">
+                        <h5><i class="bi bi-info-circle"></i> Thông Tin Thanh Toán</h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label class="form-label fw-bold">Mã Thanh Toán:</label>
+                                    <p class="form-control-plaintext">@Model.Payment.PaymentNumber</p>
+                                </div>
+                                <div class="mb-3">
+                                    <label class="form-label fw-bold">Ngày Thanh Toán:</label>
+                                    <p class="form-control-plaintext">@Model.Payment.PaymentDate.ToString("dd/MM/yyyy HH:mm")</p>
+                                </div>
+                                <div class="mb-3">
+                                    <label class="form-label fw-bold">Số Tiền:</label>
+                                    <p class="form-control-plaintext text-success fw-bold fs-5">@Model.Payment.Amount.ToString("N0") VNĐ</p>
+                                </div>
+                                <div class="mb-3">
+                                    <label class="form-label fw-bold">Loại Thanh Toán:</label>
+                                    <p class="form-control-plaintext">
+                                        @switch (Model.Payment.PaymentType)
+                                        {
+                                            case Gr8_VehicleManagement.Data.Enums.PaymentType.Deposit:
+                                                <span class="badge bg-info">Cọc</span>
+                                                break;
+                                            case Gr8_VehicleManagement.Data.Enums.PaymentType.Installment:
+                                                <span class="badge bg-warning">Trả góp</span>
+                                                break;
+                                            case Gr8_VehicleManagement.Data.Enums.PaymentType.FullPayment:
+                                                <span class="badge bg-success">Trả thẳng</span>
+                                                break;
+                                        }
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label class="form-label fw-bold">Phương Thức Thanh Toán:</label>
+                                    <p class="form-control-plaintext">@Model.Payment.PaymentMethodType.ToString()</p>
+                                </div>
+                                <div class="mb-3">
+                                    <label class="form-label fw-bold">Trạng Thái:</label>
+                                    <p class="form-control-plaintext">
+                                        @switch (Model.Payment.Status)
+                                        {
+                                            case Gr8_VehicleManagement.Data.Enums.PaymentStatus.Pending:
+                                                <span class="badge bg-warning">Chờ xử lý</span>
+                                                break;
+                                            case Gr8_VehicleManagement.Data.Enums.PaymentStatus.PaidInFull:
+                                                <span class="badge bg-success">Đã thanh toán</span>
+                                                break;
+                                            case Gr8_VehicleManagement.Data.Enums.PaymentStatus.Refunded:
+                                                <span class="badge bg-danger">Đã hoàn tiền</span>
+                                                break;
+                                        }
+                                    </p>
+                                </div>
+                                <div class="mb-3">
+                                    <label class="form-label fw-bold">Mã Giao Dịch:</label>
+                                    <p class="form-control-plaintext">@(Model.Payment.TransactionId ?? "Chưa có")</p>
+                                </div>
+                                @if (Model.Payment.InstallmentNumber.HasValue)
+                                {
+                                    <div class="mb-3">
+                                        <label class="form-label fw-bold">Kỳ Trả Góp:</label>
+                                        <p class="form-control-plaintext">Kỳ @Model.Payment.InstallmentNumber</p>
+                                    </div>
+                                }
+                            </div>
+                        </div>
+                        
+                        @if (!string.IsNullOrEmpty(Model.Payment.Notes))
+                        {
+                            <div class="mb-3">
+                                <label class="form-label fw-bold">Ghi Chú:</label>
+                                <p class="form-control-plaintext">@Model.Payment.Notes</p>
+                            </div>
+                        }
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Statistics Card -->
+            <div class="col-md-4">
+                <div class="card">
+                    <div class="card-header">
+                        <h5><i class="bi bi-graph-up"></i> Thống Kê</h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="mb-3">
+                            <label class="form-label fw-bold">Tổng Đã Thanh Toán:</label>
+                            <p class="form-control-plaintext text-success fw-bold">@Model.TotalPaidForOrder.ToString("N0") VNĐ</p>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label fw-bold">Còn Lại:</label>
+                            <p class="form-control-plaintext text-warning fw-bold">@Model.RemainingOrderAmount.ToString("N0") VNĐ</p>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label fw-bold">Số Lần Thanh Toán:</label>
+                            <p class="form-control-plaintext">@Model.PaymentCountForOrder lần</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Customer Info Card -->
+        <div class="row mb-4">
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-header">
+                        <h5><i class="bi bi-person"></i> Thông Tin Khách Hàng</h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label class="form-label fw-bold">Tên Khách Hàng:</label>
+                                    <p class="form-control-plaintext">@Model.Payment.CustomerName</p>
+                                </div>
+                                <div class="mb-3">
+                                    <label class="form-label fw-bold">Số Điện Thoại:</label>
+                                    <p class="form-control-plaintext">@Model.Payment.CustomerPhone</p>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                @if (!string.IsNullOrEmpty(Model.Payment.CustomerEmail))
+                                {
+                                    <div class="mb-3">
+                                        <label class="form-label fw-bold">Email:</label>
+                                        <p class="form-control-plaintext">@Model.Payment.CustomerEmail</p>
+                                    </div>
+                                }
+                                @if (!string.IsNullOrEmpty(Model.Payment.CustomerAddress))
+                                {
+                                    <div class="mb-3">
+                                        <label class="form-label fw-bold">Địa Chỉ:</label>
+                                        <p class="form-control-plaintext">@Model.Payment.CustomerAddress</p>
+                                    </div>
+                                }
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Order Info Card -->
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-header">
+                        <h5><i class="bi bi-cart"></i> Thông Tin Đơn Hàng</h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="mb-3">
+                            <label class="form-label fw-bold">Mã Đơn Hàng:</label>
+                            <p class="form-control-plaintext">
+                                <a href="/Orders/Details?id=@Model.Payment.OrderId" class="text-decoration-none">
+                                    @Model.Payment.OrderCode
+                                </a>
+                            </p>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label fw-bold">Xe:</label>
+                            <p class="form-control-plaintext">@Model.Payment.VehicleInfo</p>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label fw-bold">Tổng Giá Trị Đơn Hàng:</label>
+                            <p class="form-control-plaintext fw-bold">@Model.Payment.TotalOrderAmount?.ToString("N0") VNĐ</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Payment Actions -->
+        @if (Model.CanEdit || Model.CanRefund || Model.CanApprove)
+        {
+            <div class="row mb-4">
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <h5><i class="bi bi-gear"></i> Thao Tác</h5>
+                        </div>
+                        <div class="card-body">
+                            <div class="row">
+                                @if (Model.CanEdit)
+                                {
+                                    <div class="col-md-3">
+                                        <a href="/Payments/Edit?id=@Model.Payment.Id" class="btn btn-warning w-100">
+                                            <i class="bi bi-pencil"></i> Chỉnh Sửa
+                                        </a>
+                                    </div>
+                                }
+                                @if (Model.CanRefund && Model.Payment.Status == Gr8_VehicleManagement.Data.Enums.PaymentStatus.PaidInFull)
+                                {
+                                    <div class="col-md-3">
+                                        <button type="button" class="btn btn-danger w-100" data-bs-toggle="modal" data-bs-target="#refundModal">
+                                            <i class="bi bi-arrow-clockwise"></i> Hoàn Tiền
+                                        </button>
+                                    </div>
+                                }
+                                @if (Model.CanApprove && Model.Payment.Status == Gr8_VehicleManagement.Data.Enums.PaymentStatus.Pending)
+                                {
+                                    <div class="col-md-3">
+                                        <button type="button" class="btn btn-success w-100" onclick="approvePayment()">
+                                            <i class="bi bi-check-circle"></i> Xác Nhận
+                                        </button>
+                                    </div>
+                                }
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+
+        <!-- Refund Modal -->
+        <div class="modal fade" id="refundModal" tabindex="-1">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Xác Nhận Hoàn Tiền</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                    </div>
+                    <div class="modal-body">
+                        <form id="refundForm">
+                            <div class="mb-3">
+                                <label class="form-label">Lý Do Hoàn Tiền:</label>
+                                <textarea class="form-control" name="refundReason" rows="3" required></textarea>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
+                        <button type="button" class="btn btn-danger" onclick="processRefund()">Xác Nhận Hoàn Tiền</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+    else
+    {
+        <div class="text-center py-5">
+            <i class="bi bi-exclamation-triangle" style="font-size: 5rem; color: #dc3545;"></i>
+            <p class="text-muted mt-3">Không tìm thấy thanh toán</p>
+        </div>
+    }
+</div>
+
+<script>
+    function approvePayment() {
+        if (confirm('Bạn có chắc chắn muốn xác nhận thanh toán này?')) {
+            // TODO: Implement approve payment
+            alert('Chức năng đang được phát triển');
+        }
+    }
+
+    function processRefund() {
+        const form = document.getElementById('refundForm');
+        const formData = new FormData(form);
+        const reason = formData.get('refundReason');
+        
+        if (!reason.trim()) {
+            alert('Vui lòng nhập lý do hoàn tiền');
+            return;
+        }
+        
+        if (confirm('Bạn có chắc chắn muốn hoàn tiền thanh toán này?')) {
+            // TODO: Implement refund processing
+            alert('Chức năng đang được phát triển');
+        }
+    }
+</script>

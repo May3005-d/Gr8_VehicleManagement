@@ -1,0 +1,274 @@
+@page
+@model Gr8_VehicleManagement.Pages.Promotions.IndexModel
+@{
+    ViewData["Title"] = "Quản Lý Khuyến Mãi";
+}
+
+<div class="container-fluid mt-4">
+    <div class="row mb-4">
+        <div class="col-md-6">
+            <h1 class="fade-in-up"><i class="bi bi-gift me-2"></i> Quản Lý Khuyến Mãi</h1>
+        </div>
+        <div class="col-md-6 text-end">
+            @if (Model.CanCreate)
+            {
+                <a href="/Promotions/Create" class="btn btn-primary btn-custom">
+                    <i class="bi bi-plus-circle me-2"></i> Tạo Khuyến Mãi
+                </a>
+            }
+        </div>
+    </div>
+
+    <!-- Search & Filters -->
+    <div class="card mb-4">
+        <div class="card-body">
+            <form method="get" class="row g-3">
+                <div class="col-md-4">
+                    <label class="form-label">Tìm kiếm</label>
+                    <input type="text" name="searchTerm" class="form-control" placeholder="Tên, mã khuyến mãi..." value="@Model.SearchTerm" />
+                </div>
+                <div class="col-md-3">
+                    <label class="form-label">Trạng thái</label>
+                    <select name="isActive" class="form-select">
+                        <option value="">Tất cả</option>
+                        <option value="true" selected="@(Model.IsActive == true)">Đang hoạt động</option>
+                        <option value="false" selected="@(Model.IsActive == false)">Ngừng hoạt động</option>
+                    </select>
+                </div>
+                <div class="col-md-2">
+                    <label class="form-label">Từ ngày</label>
+                    <input type="date" name="startDate" class="form-control" value="@Model.StartDate?.ToString("yyyy-MM-dd")" />
+                </div>
+                <div class="col-md-2">
+                    <label class="form-label">Đến ngày</label>
+                    <input type="date" name="endDate" class="form-control" value="@Model.EndDate?.ToString("yyyy-MM-dd")" />
+                </div>
+                <div class="col-md-1 d-flex align-items-end">
+                    <button type="submit" class="btn btn-primary w-100">
+                        <i class="bi bi-search"></i>
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Statistics Cards -->
+    <div class="row mb-4">
+        <div class="col-md-3">
+            <div class="card bg-primary text-white">
+                <div class="card-body">
+                    <div class="d-flex justify-content-between">
+                        <div>
+                            <h4 class="mb-0">@Model.TotalPromotions</h4>
+                            <p class="mb-0">Tổng khuyến mãi</p>
+                        </div>
+                        <div class="align-self-center">
+                            <i class="bi bi-gift fs-1"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card bg-success text-white">
+                <div class="card-body">
+                    <div class="d-flex justify-content-between">
+                        <div>
+                            <h4 class="mb-0">@Model.ActivePromotions</h4>
+                            <p class="mb-0">Đang hoạt động</p>
+                        </div>
+                        <div class="align-self-center">
+                            <i class="bi bi-check-circle fs-1"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card bg-warning text-white">
+                <div class="card-body">
+                    <div class="d-flex justify-content-between">
+                        <div>
+                            <h4 class="mb-0">@Model.ExpiringSoon</h4>
+                            <p class="mb-0">Sắp hết hạn</p>
+                        </div>
+                        <div class="align-self-center">
+                            <i class="bi bi-exclamation-triangle fs-1"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card bg-info text-white">
+                <div class="card-body">
+                    <div class="d-flex justify-content-between">
+                        <div>
+                            <h4 class="mb-0">@Model.TotalDiscount</h4>
+                            <p class="mb-0">Tổng giảm giá (VNĐ)</p>
+                        </div>
+                        <div class="align-self-center">
+                            <i class="bi bi-currency-dollar fs-1"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Promotions List -->
+    <div class="card">
+        <div class="card-header">
+            <h5 class="mb-0">Danh Sách Khuyến Mãi</h5>
+        </div>
+        <div class="card-body">
+            @if (Model.Promotions.Any())
+            {
+                <div class="table-responsive">
+                    <table class="table table-hover">
+                        <thead>
+                            <tr>
+                                <th>Mã</th>
+                                <th>Tên</th>
+                                <th>Loại giảm giá</th>
+                                <th>Giá trị</th>
+                                <th>Thời gian</th>
+                                <th>Sử dụng</th>
+                                <th>Trạng thái</th>
+                                <th>Thao tác</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var promotion in Model.Promotions)
+                            {
+                                <tr>
+                                    <td>
+                                        <span class="badge bg-secondary">@promotion.Code</span>
+                                    </td>
+                                    <td>
+                                        <strong>@promotion.Name</strong>
+                                        @if (!string.IsNullOrEmpty(promotion.Description))
+                                        {
+                                            <br><small class="text-muted">@promotion.Description</small>
+                                        }
+                                    </td>
+                                    <td>
+                                        <span class="badge @(promotion.DiscountType == Gr8_VehicleManagement.Data.Enums.DiscountType.Percentage ? "bg-primary" : "bg-success")">
+                                            @(promotion.DiscountType == Gr8_VehicleManagement.Data.Enums.DiscountType.Percentage ? "Phần trăm" : "Cố định")
+                                        </span>
+                                    </td>
+                                    <td>
+                                        <strong class="text-primary">@promotion.DiscountDisplay</strong>
+                                        @if (promotion.MinOrderValue.HasValue)
+                                        {
+                                            <br><small class="text-muted">Tối thiểu: @promotion.MinOrderValue.Value.ToString("N0") VNĐ</small>
+                                        }
+                                    </td>
+                                    <td>
+                                        <small>
+                                            <strong>Từ:</strong> @promotion.StartDate.ToString("dd/MM/yyyy")<br>
+                                            <strong>Đến:</strong> @promotion.EndDate.ToString("dd/MM/yyyy")
+                                        </small>
+                                    </td>
+                                    <td>
+                                        <span class="badge bg-info">@promotion.UsedCount</span>
+                                        @if (promotion.UsageLimit.HasValue)
+                                        {
+                                            <span class="text-muted">/ @promotion.UsageLimit</span>
+                                        }
+                                        else
+                                        {
+                                            <span class="text-muted">/ ∞</span>
+                                        }
+                                    </td>
+                                    <td>
+                                        @if (promotion.IsValid)
+                                        {
+                                            <span class="badge bg-success">Hiệu lực</span>
+                                        }
+                                        else if (!promotion.IsActive)
+                                        {
+                                            <span class="badge bg-secondary">Ngừng hoạt động</span>
+                                        }
+                                        else if (DateTime.Now < promotion.StartDate)
+                                        {
+                                            <span class="badge bg-warning">Chưa bắt đầu</span>
+                                        }
+                                        else if (DateTime.Now > promotion.EndDate)
+                                        {
+                                            <span class="badge bg-danger">Hết hạn</span>
+                                        }
+                                        else
+                                        {
+                                            <span class="badge bg-danger">Hết lượt</span>
+                                        }
+                                    </td>
+                                    <td>
+                                        <div class="btn-group" role="group">
+                                            <a href="/Promotions/Details?id=@promotion.Id" class="btn btn-sm btn-outline-primary">
+                                                <i class="bi bi-eye"></i>
+                                            </a>
+                                            @if (Model.CanEdit)
+                                            {
+                                                <a href="/Promotions/Edit?id=@promotion.Id" class="btn btn-sm btn-outline-secondary">
+                                                    <i class="bi bi-pencil"></i>
+                                                </a>
+                                            }
+                                        </div>
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- Pagination -->
+                @if (Model.TotalPages > 1)
+                {
+                    <nav aria-label="Promotions pagination">
+                        <ul class="pagination justify-content-center">
+                            @if (Model.HasPreviousPage)
+                            {
+                                <li class="page-item">
+                                    <a class="page-link" href="?pageNumber=@(Model.PageNumber - 1)&searchTerm=@Model.SearchTerm&isActive=@Model.IsActive&startDate=@Model.StartDate?.ToString("yyyy-MM-dd")&endDate=@Model.EndDate?.ToString("yyyy-MM-dd")">
+                                        <i class="bi bi-chevron-left"></i>
+                                    </a>
+                                </li>
+                            }
+
+                            @for (int i = Math.Max(1, Model.PageNumber - 2); i <= Math.Min(Model.TotalPages, Model.PageNumber + 2); i++)
+                            {
+                                <li class="page-item @(i == Model.PageNumber ? "active" : "")">
+                                    <a class="page-link" href="?pageNumber=@i&searchTerm=@Model.SearchTerm&isActive=@Model.IsActive&startDate=@Model.StartDate?.ToString("yyyy-MM-dd")&endDate=@Model.EndDate?.ToString("yyyy-MM-dd")">@i</a>
+                                </li>
+                            }
+
+                            @if (Model.HasNextPage)
+                            {
+                                <li class="page-item">
+                                    <a class="page-link" href="?pageNumber=@(Model.PageNumber + 1)&searchTerm=@Model.SearchTerm&isActive=@Model.IsActive&startDate=@Model.StartDate?.ToString("yyyy-MM-dd")&endDate=@Model.EndDate?.ToString("yyyy-MM-dd")">
+                                        <i class="bi bi-chevron-right"></i>
+                                    </a>
+                                </li>
+                            }
+                        </ul>
+                    </nav>
+                }
+            }
+            else
+            {
+                <div class="text-center py-5">
+                    <i class="bi bi-gift fs-1 text-muted"></i>
+                    <h5 class="mt-3">Chưa có khuyến mãi nào</h5>
+                    <p class="text-muted">Bắt đầu tạo khuyến mãi đầu tiên của bạn</p>
+                    @if (Model.CanCreate)
+                    {
+                        <a href="/Promotions/Create" class="btn btn-primary">
+                            <i class="bi bi-plus-circle me-2"></i> Tạo Khuyến Mãi
+                        </a>
+                    }
+                </div>
+            }
+        </div>
+    </div>
+</div>

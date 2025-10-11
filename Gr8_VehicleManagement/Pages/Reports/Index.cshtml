@@ -1,0 +1,345 @@
+@page
+@model Gr8_VehicleManagement.Pages.Reports.IndexModel
+@{
+    ViewData["Title"] = "Báo Cáo & Phân Tích";
+}
+
+<div class="container-fluid">
+    <!-- Header -->
+    <div class="row mb-4">
+        <div class="col-md-6">
+            <h2 class="mb-0">
+                <i class="bi bi-graph-up"></i> Báo Cáo & Phân Tích
+            </h2>
+            <p class="text-muted">Báo cáo chi tiết về hiệu suất bán hàng và phân tích dữ liệu</p>
+        </div>
+        <div class="col-md-6 text-end">
+            <button class="btn btn-success btn-custom" onclick="exportReport()">
+                <i class="bi bi-download me-2"></i> Xuất Báo Cáo
+            </button>
+        </div>
+    </div>
+
+    <!-- Date Range Filter -->
+    <div class="card mb-4">
+        <div class="card-body">
+            <form method="get" class="row g-3">
+                <div class="col-md-3">
+                    <label class="form-label">Từ Ngày</label>
+                    <input type="date" class="form-control" name="startDate" value="@Model.StartDate.ToString("yyyy-MM-dd")">
+                </div>
+                <div class="col-md-3">
+                    <label class="form-label">Đến Ngày</label>
+                    <input type="date" class="form-control" name="endDate" value="@Model.EndDate.ToString("yyyy-MM-dd")">
+                </div>
+                <div class="col-md-3">
+                    <label class="form-label">Đại Lý</label>
+                    <select class="form-select" name="dealerId">
+                        <option value="">Tất cả đại lý</option>
+                        @foreach (var dealer in Model.Dealers)
+                        {
+                            <option value="@dealer.Id" selected="@(Model.SelectedDealerId == dealer.Id)">@dealer.FullName</option>
+                        }
+                    </select>
+                </div>
+                <div class="col-md-3">
+                    <label class="form-label">&nbsp;</label>
+                    <button type="submit" class="btn btn-primary d-block w-100">
+                        <i class="bi bi-search me-2"></i> Lọc Báo Cáo
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Key Metrics -->
+    <div class="row mb-4">
+        <div class="col-md-3">
+            <div class="card bg-primary text-white">
+                <div class="card-body">
+                    <div class="d-flex justify-content-between">
+                        <div>
+                            <h4 class="card-title">@Model.DashboardData.TotalOrders</h4>
+                            <p class="card-text">Tổng Đơn Hàng</p>
+                        </div>
+                        <div class="align-self-center">
+                            <i class="bi bi-cart-check fs-1"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card bg-success text-white">
+                <div class="card-body">
+                    <div class="d-flex justify-content-between">
+                        <div>
+                            <h4 class="card-title">@Model.DashboardData.TotalRevenue.ToString("N0") VNĐ</h4>
+                            <p class="card-text">Tổng Doanh Thu</p>
+                        </div>
+                        <div class="align-self-center">
+                            <i class="bi bi-currency-dollar fs-1"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card bg-info text-white">
+                <div class="card-body">
+                    <div class="d-flex justify-content-between">
+                        <div>
+                            <h4 class="card-title">@Model.DashboardData.TotalCustomers</h4>
+                            <p class="card-text">Tổng Khách Hàng</p>
+                        </div>
+                        <div class="align-self-center">
+                            <i class="bi bi-people fs-1"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card bg-warning text-white">
+                <div class="card-body">
+                    <div class="d-flex justify-content-between">
+                        <div>
+                            <h4 class="card-title">@Model.DashboardData.AverageOrderValue.ToString("N0") VNĐ</h4>
+                            <p class="card-text">Giá Trị TB/Đơn</p>
+                        </div>
+                        <div class="align-self-center">
+                            <i class="bi bi-graph-up fs-1"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Growth Metrics -->
+    <div class="row mb-4">
+        <div class="col-md-4">
+            <div class="card">
+                <div class="card-body text-center">
+                    <h5 class="card-title text-success">
+                        <i class="bi bi-arrow-up"></i> @Model.DashboardData.RevenueGrowth%
+                    </h5>
+                    <p class="card-text">Tăng Trưởng Doanh Thu</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card">
+                <div class="card-body text-center">
+                    <h5 class="card-title text-info">
+                        <i class="bi bi-arrow-up"></i> @Model.DashboardData.OrderGrowth%
+                    </h5>
+                    <p class="card-text">Tăng Trưởng Đơn Hàng</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card">
+                <div class="card-body text-center">
+                    <h5 class="card-title text-primary">
+                        <i class="bi bi-arrow-up"></i> @Model.DashboardData.CustomerGrowth%
+                    </h5>
+                    <p class="card-text">Tăng Trưởng Khách Hàng</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Charts Row -->
+    <div class="row mb-4">
+        <!-- Sales Chart -->
+        <div class="col-md-8">
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="mb-0">Biểu Đồ Doanh Thu</h5>
+                </div>
+                <div class="card-body">
+                    <canvas id="salesChart" height="300"></canvas>
+                </div>
+            </div>
+        </div>
+
+        <!-- Top Sellers -->
+        <div class="col-md-4">
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="mb-0">Top Người Bán</h5>
+                </div>
+                <div class="card-body">
+                    @if (Model.DashboardData.TopSellers.Any())
+                    {
+                        @foreach (var seller in Model.DashboardData.TopSellers.Take(5))
+                        {
+                            <div class="d-flex justify-content-between align-items-center mb-2">
+                                <div>
+                                    <strong>@seller.UserName</strong>
+                                    <br><small class="text-muted">@seller.DealerName</small>
+                                </div>
+                                <div class="text-end">
+                                    <span class="badge bg-primary">@seller.OrdersSold đơn</span>
+                                    <br><small>@seller.Revenue.ToString("N0") VNĐ</small>
+                                </div>
+                            </div>
+                            <hr>
+                        }
+                    }
+                    else
+                    {
+                        <p class="text-muted">Chưa có dữ liệu</p>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Performance Indicators -->
+    <div class="row mb-4">
+        <div class="col-md-3">
+            <div class="card">
+                <div class="card-body text-center">
+                    <h5 class="card-title text-success">@Model.DashboardData.ConversionRate%</h5>
+                    <p class="card-text">Tỷ Lệ Chuyển Đổi</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card">
+                <div class="card-body text-center">
+                    <h5 class="card-title text-warning">@Model.DashboardData.CustomerSatisfaction/5</h5>
+                    <p class="card-text">Hài Lòng Khách Hàng</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card">
+                <div class="card-body text-center">
+                    <h5 class="card-title text-info">@Model.DashboardData.PendingOrders</h5>
+                    <p class="card-text">Đơn Hàng Chờ</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card">
+                <div class="card-body text-center">
+                    <h5 class="card-title text-danger">@Model.DashboardData.OverdueFeedbacks</h5>
+                    <p class="card-text">Phản Hồi Quá Hạn</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Top Vehicles -->
+    <div class="row">
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="mb-0">Xe Bán Chạy</h5>
+                </div>
+                <div class="card-body">
+                    @if (Model.DashboardData.TopVehicles.Any())
+                    {
+                        @foreach (var vehicle in Model.DashboardData.TopVehicles.Take(5))
+                        {
+                            <div class="d-flex justify-content-between align-items-center mb-2">
+                                <div>
+                                    <strong>@vehicle.VehicleName</strong>
+                                    <br><small class="text-muted">@vehicle.Brand</small>
+                                </div>
+                                <div class="text-end">
+                                    <span class="badge bg-success">@vehicle.QuantitySold xe</span>
+                                    <br><small>@vehicle.Revenue.ToString("N0") VNĐ</small>
+                                </div>
+                            </div>
+                            <hr>
+                        }
+                    }
+                    else
+                    {
+                        <p class="text-muted">Chưa có dữ liệu</p>
+                    }
+                </div>
+            </div>
+        </div>
+
+        <!-- Customer Segments -->
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="mb-0">Phân Khúc Khách Hàng</h5>
+                </div>
+                <div class="card-body">
+                    @if (Model.DashboardData.CustomerSegments.Any())
+                    {
+                        @foreach (var segment in Model.DashboardData.CustomerSegments)
+                        {
+                            <div class="d-flex justify-content-between align-items-center mb-2">
+                                <div>
+                                    <strong>@segment.SegmentName</strong>
+                                    <br><small class="text-muted">@segment.CustomerCount khách hàng</small>
+                                </div>
+                                <div class="text-end">
+                                    <span class="badge bg-info">@segment.Percentage%</span>
+                                    <br><small>@segment.TotalValue.ToString("N0") VNĐ</small>
+                                </div>
+                            </div>
+                            <hr>
+                        }
+                    }
+                    else
+                    {
+                        <p class="text-muted">Chưa có dữ liệu</p>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Chart.js -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+    // Sales Chart
+    const salesCtx = document.getElementById('salesChart').getContext('2d');
+    const salesChart = new Chart(salesCtx, {
+        type: 'line',
+        data: {
+            labels: @Html.Raw(Json.Serialize(Model.DashboardData.SalesChart.Select(x => x.Date.ToString("dd/MM")).ToList())),
+            datasets: [{
+                label: 'Doanh Thu',
+                data: @Html.Raw(Json.Serialize(Model.DashboardData.SalesChart.Select(x => x.Revenue).ToList())),
+                borderColor: 'rgb(75, 192, 192)',
+                backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                tension: 0.1
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            scales: {
+                y: {
+                    beginAtZero: true,
+                    ticks: {
+                        callback: function(value) {
+                            return value.toLocaleString() + ' VNĐ';
+                        }
+                    }
+                }
+            }
+        }
+    });
+
+    // Export function
+    function exportReport() {
+        const startDate = document.querySelector('input[name="startDate"]').value;
+        const endDate = document.querySelector('input[name="endDate"]').value;
+        const dealerId = document.querySelector('select[name="dealerId"]').value;
+        
+        const url = `/Reports/Export?startDate=${startDate}&endDate=${endDate}&dealerId=${dealerId}`;
+        window.open(url, '_blank');
+    }
+</script>

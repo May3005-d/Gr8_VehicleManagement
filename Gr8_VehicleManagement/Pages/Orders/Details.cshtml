@@ -1,0 +1,353 @@
+@page
+@model Gr8_VehicleManagement.Pages.Orders.DetailsModel
+@{
+    ViewData["Title"] = Model.Order?.OrderCode ?? "Chi Tiết Đơn Hàng";
+}
+
+<div class="container-fluid mt-4">
+    @if (Model.Order == null)
+    {
+        <div class="alert alert-danger">
+            <i class="bi bi-exclamation-triangle"></i> Không tìm thấy đơn hàng
+        </div>
+        <a href="/Orders" class="btn btn-secondary">Quay lại danh sách</a>
+        return;
+    }
+
+    <!-- Breadcrumb -->
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="/">Home</a></li>
+            <li class="breadcrumb-item"><a href="/Orders">Đơn hàng</a></li>
+            <li class="breadcrumb-item active">@Model.Order.OrderCode</li>
+        </ol>
+    </nav>
+
+    <!-- Header -->
+    <div class="row mb-4">
+        <div class="col-md-8">
+            <h1><i class="bi bi-cart-check"></i> Đơn Hàng @Model.Order.OrderCode</h1>
+            <p class="lead text-muted">
+                Đặt ngày: @Model.Order.OrderDate.ToString("dd/MM/yyyy HH:mm") | 
+                Tổng tiền: <strong>@Model.Order.TotalAmount.ToString("N0") VNĐ</strong>
+            </p>
+        </div>
+        <div class="col-md-4 text-end">
+            @if (Model.CanEdit)
+            {
+                <a href="/Orders/Edit?id=@Model.Order.Id" class="btn btn-warning">
+                    <i class="bi bi-pencil"></i> Sửa
+                </a>
+            }
+            @if (Model.CanCreatePayment)
+            {
+                <a href="/Payments/Create?orderId=@Model.Order.Id" class="btn btn-success">
+                    <i class="bi bi-credit-card"></i> Thanh toán
+                </a>
+            }
+        </div>
+    </div>
+
+    <!-- Statistics -->
+    <div class="row mb-4">
+        <div class="col-md-3">
+            <div class="card text-center">
+                <div class="card-body">
+                    <h3 class="text-primary">@Model.PaymentCount</h3>
+                    <p class="text-muted mb-0">Lần thanh toán</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card text-center">
+                <div class="card-body">
+                    <h3 class="text-success">@Model.TotalPaid.ToString("N0")</h3>
+                    <p class="text-muted mb-0">Đã thanh toán (VNĐ)</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card text-center">
+                <div class="card-body">
+                    <h3 class="text-warning">@Model.RemainingAmount.ToString("N0")</h3>
+                    <p class="text-muted mb-0">Còn lại (VNĐ)</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card text-center">
+                <div class="card-body">
+                    <h3 class="text-info">@Model.FeedbackCount</h3>
+                    <p class="text-muted mb-0">Phản hồi</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <!-- Order Info -->
+        <div class="col-md-6 mb-4">
+            <div class="card h-100">
+                <div class="card-header bg-primary text-white">
+                    <h5 class="mb-0"><i class="bi bi-info-circle"></i> Thông Tin Đơn Hàng</h5>
+                </div>
+                <div class="card-body">
+                    <table class="table table-borderless">
+                        <tr>
+                            <th width="40%">Mã đơn hàng:</th>
+                            <td><strong>@Model.Order.OrderCode</strong></td>
+                        </tr>
+                        <tr>
+                            <th>Ngày đặt:</th>
+                            <td>@Model.Order.OrderDate.ToString("dd/MM/yyyy HH:mm")</td>
+                        </tr>
+                        <tr>
+                            <th>Trạng thái:</th>
+                            <td>
+                                @switch (Model.Order.Status)
+                                {
+                                        case Gr8_VehicleManagement.Data.Enums.OrderStatus.Draft:
+                                        <span class="badge bg-warning">Chờ xử lý</span>
+                                        break;
+                                    case Gr8_VehicleManagement.Data.Enums.OrderStatus.Confirmed:
+                                        <span class="badge bg-info">Đã xác nhận</span>
+                                        break;
+                                    case Gr8_VehicleManagement.Data.Enums.OrderStatus.Processing:
+                                        <span class="badge bg-primary">Đang xử lý</span>
+                                        break;
+                                    case Gr8_VehicleManagement.Data.Enums.OrderStatus.Delivered:
+                                        <span class="badge bg-success">Đã giao</span>
+                                        break;
+                                    case Gr8_VehicleManagement.Data.Enums.OrderStatus.Cancelled:
+                                        <span class="badge bg-danger">Đã hủy</span>
+                                        break;
+                                }
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>TT Thanh toán:</th>
+                            <td>
+                                @switch (Model.Order.PaymentStatus)
+                                {
+                                    case Gr8_VehicleManagement.Data.Enums.PaymentStatus.Pending:
+                                        <span class="badge bg-warning">Chờ thanh toán</span>
+                                        break;
+                                        case Gr8_VehicleManagement.Data.Enums.PaymentStatus.PartiallyPaid:
+                                        <span class="badge bg-info">Thanh toán một phần</span>
+                                        break;
+                                            case Gr8_VehicleManagement.Data.Enums.PaymentStatus.PaidInFull:
+                                        <span class="badge bg-success">Đã thanh toán</span>
+                                        break;
+                                    case Gr8_VehicleManagement.Data.Enums.PaymentStatus.Refunded:
+                                        <span class="badge bg-danger">Đã hoàn tiền</span>
+                                        break;
+                                }
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>Phương thức TT:</th>
+                            <td>@Model.Order.PaymentMethodDisplay</td>
+                        </tr>
+                        <tr>
+                            <th>Dự kiến giao:</th>
+                            <td>@(Model.Order.ExpectedDeliveryDate?.ToString("dd/MM/yyyy") ?? "-")</td>
+                        </tr>
+                        <tr>
+                            <th>Thực tế giao:</th>
+                            <td>@(Model.Order.ActualDeliveryDate?.ToString("dd/MM/yyyy") ?? "-")</td>
+                        </tr>
+                        @if (!string.IsNullOrEmpty(Model.Order.ContractNumber))
+                        {
+                            <tr>
+                                <th>Số HĐ:</th>
+                                <td><strong>@Model.Order.ContractNumber</strong></td>
+                            </tr>
+                        }
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <!-- Customer & Vehicle Info -->
+        <div class="col-md-6 mb-4">
+            <div class="card h-100">
+                <div class="card-header bg-info text-white">
+                    <h5 class="mb-0"><i class="bi bi-person"></i> Khách Hàng & Xe</h5>
+                </div>
+                <div class="card-body">
+                    <h6><i class="bi bi-person-circle"></i> Thông tin khách hàng</h6>
+                    <table class="table table-borderless small">
+                        <tr>
+                            <th width="30%">Tên:</th>
+                            <td>@Model.Order.CustomerName</td>
+                        </tr>
+                        <tr>
+                            <th>SĐT:</th>
+                            <td>@Model.Order.CustomerPhone</td>
+                        </tr>
+                        <tr>
+                            <th>Email:</th>
+                            <td>@(Model.Order.CustomerEmail ?? "-")</td>
+                        </tr>
+                        <tr>
+                            <th>Địa chỉ:</th>
+                            <td>@(Model.Order.CustomerAddress ?? "-")</td>
+                        </tr>
+                    </table>
+
+                    <hr />
+
+                    <h6><i class="bi bi-car-front"></i> Thông tin xe</h6>
+                    <table class="table table-borderless small">
+                        <tr>
+                            <th width="30%">Xe:</th>
+                            <td><strong>@Model.Order.VehicleName</strong></td>
+                        </tr>
+                        <tr>
+                            <th>Màu:</th>
+                            <td>@Model.Order.VehicleColor</td>
+                        </tr>
+                        <tr>
+                            <th>Thông số:</th>
+                            <td>@(Model.Order.VehicleSpecs ?? "-")</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Pricing -->
+    <div class="card mb-4">
+        <div class="card-header">
+            <h5 class="mb-0"><i class="bi bi-cash-stack"></i> Thông Tin Tài Chính</h5>
+        </div>
+        <div class="card-body">
+            <div class="row">
+                <div class="col-md-6">
+                    <table class="table table-borderless">
+                        <tr>
+                            <th>Giá gốc:</th>
+                            <td class="text-end"><strong>@Model.Order.BasePrice.ToString("N0") VNĐ</strong></td>
+                        </tr>
+                        <tr>
+                            <th>Giảm giá:</th>
+                            <td class="text-end text-danger">-@Model.Order.DiscountAmount.ToString("N0") VNĐ</td>
+                        </tr>
+                        <tr class="border-top">
+                            <th>Tổng tiền:</th>
+                            <td class="text-end"><strong class="text-primary">@Model.Order.TotalAmount.ToString("N0") VNĐ</strong></td>
+                        </tr>
+                        <tr>
+                            <th>Đã cọc:</th>
+                            <td class="text-end">@Model.Order.DepositAmount.ToString("N0") VNĐ</td>
+                        </tr>
+                        <tr>
+                            <th>Còn lại:</th>
+                            <td class="text-end"><strong class="text-warning">@Model.Order.RemainingAmount.ToString("N0") VNĐ</strong></td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="col-md-6">
+                    @if (Model.Order.PaymentMethod == Gr8_VehicleManagement.Data.Enums.PaymentMethod.Installment)
+                    {
+                        <h6>Thông tin trả góp:</h6>
+                        <table class="table table-borderless small">
+                            <tr>
+                                <th>Ngân hàng:</th>
+                                <td>@(Model.Order.InstallmentProvider ?? "-")</td>
+                            </tr>
+                            <tr>
+                                <th>Kỳ hạn:</th>
+                                <td>@(Model.Order.InstallmentTerm?.ToString() ?? "-") tháng</td>
+                            </tr>
+                            <tr>
+                                <th>Trả hàng tháng:</th>
+                                <td>@(Model.Order.MonthlyPayment?.ToString("N0") ?? "-") VNĐ</td>
+                            </tr>
+                            <tr>
+                                <th>Lãi suất:</th>
+                                <td>@(Model.Order.InterestRate?.ToString("P2") ?? "-")</td>
+                            </tr>
+                        </table>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Payments -->
+    @if (Model.Order.Payments.Any())
+    {
+        <div class="card mb-4">
+            <div class="card-header">
+                <h5 class="mb-0"><i class="bi bi-credit-card"></i> Lịch Sử Thanh Toán (@Model.Order.Payments.Count)</h5>
+            </div>
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Mã TT</th>
+                                <th>Ngày</th>
+                                <th>Số tiền</th>
+                                <th>Loại</th>
+                                <th>Hình thức</th>
+                                <th>Trạng thái</th>
+                                <th>Ghi chú</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var payment in Model.Order.Payments)
+                            {
+                                <tr>
+                                    <td><strong>@payment.PaymentNumber</strong></td>
+                                    <td>@payment.PaymentDate.ToString("dd/MM/yyyy")</td>
+                                    <td><strong>@payment.Amount.ToString("N0") VNĐ</strong></td>
+                                    <td>@payment.PaymentType.ToString()</td>
+                                    <td>@payment.PaymentMethodType.ToString()</td>
+                                    <td>
+                                        @switch (payment.Status)
+                                        {
+                                            case Gr8_VehicleManagement.Data.Enums.PaymentStatus.Pending:
+                                                <span class="badge bg-warning">Chờ xử lý</span>
+                                                break;
+                                            case Gr8_VehicleManagement.Data.Enums.PaymentStatus.PaidInFull:
+                                                <span class="badge bg-success">Hoàn thành</span>
+                                                break;
+                                            case Gr8_VehicleManagement.Data.Enums.PaymentStatus.Refunded:
+                                                <span class="badge bg-danger">Đã hoàn tiền</span>
+                                                break;
+                                        }
+                                    </td>
+                                    <td>@(payment.Notes ?? "-")</td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    }
+
+    <!-- Notes -->
+    @if (!string.IsNullOrEmpty(Model.Order.Notes))
+    {
+        <div class="card mb-4">
+            <div class="card-header">
+                <h5 class="mb-0"><i class="bi bi-sticky"></i> Ghi Chú</h5>
+            </div>
+            <div class="card-body">
+                <p>@Model.Order.Notes</p>
+            </div>
+        </div>
+    }
+
+    <!-- Back Button -->
+    <div class="mb-4">
+        <a href="/Orders" class="btn btn-secondary">
+            <i class="bi bi-arrow-left"></i> Quay lại danh sách
+        </a>
+    </div>
+</div>
+

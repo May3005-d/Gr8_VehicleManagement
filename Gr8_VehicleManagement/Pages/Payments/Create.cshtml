@@ -1,0 +1,183 @@
+@page
+@model Gr8_VehicleManagement.Pages.Payments.CreateModel
+@{
+    ViewData["Title"] = "Tạo Thanh Toán";
+}
+
+<div class="container-fluid mt-4">
+    <div class="row mb-4">
+        <div class="col-md-6">
+            <h1><i class="bi bi-plus-circle"></i> Tạo Thanh Toán</h1>
+        </div>
+        <div class="col-md-6 text-end">
+            <a href="/Payments/Index" class="btn btn-secondary">
+                <i class="bi bi-arrow-left"></i> Quay lại
+            </a>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-8">
+            <div class="card">
+                <div class="card-header">
+                    <h5><i class="bi bi-credit-card"></i> Thông Tin Thanh Toán</h5>
+                </div>
+                <div class="card-body">
+                    <form method="post">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label class="form-label">Đơn Hàng <span class="text-danger">*</span></label>
+                                    <select asp-for="Payment.OrderId" class="form-select" required>
+                                        <option value="">-- Chọn đơn hàng --</option>
+                                        @foreach (var order in Model.Orders)
+                                        {
+                                            <option value="@order.Id">@order.OrderCode - @order.CustomerName</option>
+                                        }
+                                    </select>
+                                    <span asp-validation-for="Payment.OrderId" class="text-danger"></span>
+                                </div>
+                                <div class="mb-3">
+                                    <label class="form-label">Khách Hàng <span class="text-danger">*</span></label>
+                                    <select asp-for="Payment.CustomerId" class="form-select" required>
+                                        <option value="">-- Chọn khách hàng --</option>
+                                        @foreach (var customer in Model.Customers)
+                                        {
+                                            <option value="@customer.Id">@customer.FullName - @customer.PhoneNumber</option>
+                                        }
+                                    </select>
+                                    <span asp-validation-for="Payment.CustomerId" class="text-danger"></span>
+                                </div>
+                                <div class="mb-3">
+                                    <label class="form-label">Số Tiền <span class="text-danger">*</span></label>
+                                    <input asp-for="Payment.Amount" type="number" step="0.01" class="form-control" required />
+                                    <span asp-validation-for="Payment.Amount" class="text-danger"></span>
+                                </div>
+                                <div class="mb-3">
+                                    <label class="form-label">Loại Thanh Toán <span class="text-danger">*</span></label>
+                                    <select asp-for="Payment.PaymentType" class="form-select" required>
+                                        <option value="">-- Chọn loại thanh toán --</option>
+                                        <option value="1">Cọc</option>
+                                        <option value="2">Trả góp</option>
+                                        <option value="3">Trả thẳng</option>
+                                    </select>
+                                    <span asp-validation-for="Payment.PaymentType" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label class="form-label">Phương Thức Thanh Toán <span class="text-danger">*</span></label>
+                                    <select asp-for="Payment.PaymentMethodType" class="form-select" required>
+                                        <option value="">-- Chọn phương thức --</option>
+                                        <option value="1">Tiền mặt</option>
+                                        <option value="2">Chuyển khoản</option>
+                                        <option value="3">Thẻ tín dụng</option>
+                                        <option value="4">Ví điện tử</option>
+                                    </select>
+                                    <span asp-validation-for="Payment.PaymentMethodType" class="text-danger"></span>
+                                </div>
+                                <div class="mb-3">
+                                    <label class="form-label">Ngày Thanh Toán <span class="text-danger">*</span></label>
+                                    <input asp-for="Payment.PaymentDate" type="datetime-local" class="form-control" required />
+                                    <span asp-validation-for="Payment.PaymentDate" class="text-danger"></span>
+                                </div>
+                                <div class="mb-3">
+                                    <label class="form-label">Mã Giao Dịch</label>
+                                    <input asp-for="Payment.TransactionId" class="form-control" placeholder="Nhập mã giao dịch (nếu có)" />
+                                    <span asp-validation-for="Payment.TransactionId" class="text-danger"></span>
+                                </div>
+                                <div class="mb-3">
+                                    <label class="form-label">Bằng Chứng Thanh Toán</label>
+                                    <input asp-for="Payment.PaymentProof" class="form-control" placeholder="Link hoặc mô tả bằng chứng" />
+                                    <span asp-validation-for="Payment.PaymentProof" class="text-danger"></span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Installment Info -->
+                        <div id="installmentInfo" style="display: none;">
+                            <hr />
+                            <h6>Thông Tin Trả Góp</h6>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="mb-3">
+                                        <label class="form-label">Kỳ Trả Góp</label>
+                                        <input asp-for="Payment.InstallmentNumber" type="number" class="form-control" placeholder="Số kỳ trả góp" />
+                                        <span asp-validation-for="Payment.InstallmentNumber" class="text-danger"></span>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="mb-3">
+                                        <label class="form-label">Ngày Đến Hạn</label>
+                                        <input asp-for="Payment.DueDate" type="date" class="form-control" />
+                                        <span asp-validation-for="Payment.DueDate" class="text-danger"></span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">Phí Trễ Hạn</label>
+                                <input asp-for="Payment.LateFee" type="number" step="0.01" class="form-control" placeholder="Phí trễ hạn (nếu có)" />
+                                <span asp-validation-for="Payment.LateFee" class="text-danger"></span>
+                            </div>
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label">Ghi Chú</label>
+                            <textarea asp-for="Payment.Notes" class="form-control" rows="3" placeholder="Ghi chú về thanh toán"></textarea>
+                            <span asp-validation-for="Payment.Notes" class="text-danger"></span>
+                        </div>
+
+                        <div class="text-end">
+                            <button type="submit" class="btn btn-primary">
+                                <i class="bi bi-check-circle"></i> Tạo Thanh Toán
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <!-- Help Card -->
+        <div class="col-md-4">
+            <div class="card">
+                <div class="card-header">
+                    <h5><i class="bi bi-info-circle"></i> Hướng Dẫn</h5>
+                </div>
+                <div class="card-body">
+                    <div class="mb-3">
+                        <h6>Loại Thanh Toán:</h6>
+                        <ul class="list-unstyled">
+                            <li><span class="badge bg-info">Cọc</span> - Tiền cọc đặt xe</li>
+                            <li><span class="badge bg-warning">Trả góp</span> - Thanh toán theo kỳ</li>
+                            <li><span class="badge bg-success">Trả thẳng</span> - Thanh toán toàn bộ</li>
+                        </ul>
+                    </div>
+                    <div class="mb-3">
+                        <h6>Phương Thức:</h6>
+                        <ul class="list-unstyled">
+                            <li><strong>Tiền mặt</strong> - Thanh toán bằng tiền mặt</li>
+                            <li><strong>Chuyển khoản</strong> - Chuyển khoản ngân hàng</li>
+                            <li><strong>Thẻ tín dụng</strong> - Thanh toán bằng thẻ</li>
+                            <li><strong>Ví điện tử</strong> - Momo, ZaloPay, v.v.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const paymentTypeSelect = document.querySelector('select[name="Payment.PaymentType"]');
+        const installmentInfo = document.getElementById('installmentInfo');
+        
+        paymentTypeSelect.addEventListener('change', function() {
+            if (this.value === '2') { // Installment
+                installmentInfo.style.display = 'block';
+            } else {
+                installmentInfo.style.display = 'none';
+            }
+        });
+    });
+</script>
