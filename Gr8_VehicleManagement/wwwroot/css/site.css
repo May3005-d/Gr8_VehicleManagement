@@ -1,9 +1,9 @@
-/* ========================================== */
+﻿/* ========================================== */
 /* GR8 VEHICLE DEALER - MODERN UI STYLES */
 /* ========================================== */
 
 /* Global Reset & Base Styles */
-* {
+/** {
     box-sizing: border-box;
 }
 
@@ -22,13 +22,13 @@ body {
     min-height: 100vh;
     display: flex;
     flex-direction: column;
-}
+}*/
 
 /* ========================================== */
 /* NAVIGATION */
 /* ========================================== */
 
-.navbar {
+/*.navbar {
     background: linear-gradient(135deg, #667eea 0%, #764ba2 100%) !important;
     box-shadow: 0 2px 15px rgba(0,0,0,0.1);
     padding: 0.5rem 0;
@@ -68,23 +68,23 @@ body {
 
 .navbar-toggler:focus {
     box-shadow: none;
-}
+}*/
 
 /* ========================================== */
 /* MAIN CONTENT */
 /* ========================================== */
 
-.main-content {
+/*.main-content {
     flex: 1;
     padding: 0;
     min-height: calc(100vh - 140px);
-}
+}*/
 
 /* ========================================== */
 /* HERO SECTION */
 /* ========================================== */
 
-.hero-section {
+/*.hero-section {
     background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
     color: white;
     padding: 4rem 0;
@@ -101,7 +101,7 @@ body {
     left: 0;
     right: 0;
     bottom: 0;
-    background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grain" width="100" height="100" patternUnits="userSpaceOnUse"><circle cx="25" cy="25" r="1" fill="white" opacity="0.1"/><circle cx="75" cy="75" r="1" fill="white" opacity="0.1"/><circle cx="50" cy="10" r="0.5" fill="white" opacity="0.1"/><circle cx="10" cy="60" r="0.5" fill="white" opacity="0.1"/><circle cx="90" cy="40" r="0.5" fill="white" opacity="0.1"/></pattern></defs><rect width="100" height="100" fill="url(%23grain)"/></svg>');
+    background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grain" width="100" height="100" patternUnits="userSpaceOnUse"><circle cx="25" cy="25" r="1" fill="white" opacity="0.1"/><circle cx="75" cy="75" r="1" fill="white" opacity="0.1"/><circle cx="50" cy="10" r="0.5" fill="white" opacity="0.1"/><circle cx="10" cy="60" r="0.5" fill="white" opacity="0.1"/><circle cx="90" cy="40" r="0.5" fill="white" opacity="0.1"/></pattern></defs><rect width="100" height="100" fill="url(%23grain)"/>',
     opacity: 0.3;
 }
 
@@ -116,13 +116,13 @@ body {
     font-size: 1.25rem;
     margin-bottom: 2rem;
     opacity: 0.95;
-}
+}*/
 
 /* ========================================== */
 /* SECTIONS */
 /* ========================================== */
 
-.section-title {
+/*.section-title {
     font-size: 2.5rem;
     font-weight: 700;
     color: #2c3e50;
@@ -140,13 +140,13 @@ body {
 .bg-light-custom {
     background-color: #f8f9fa;
     padding: 3rem 0;
-}
+}*/
 
 /* ========================================== */
 /* CARDS */
 /* ========================================== */
 
-.feature-card {
+/*.feature-card {
     background: white;
     border-radius: 15px;
     padding: 2rem;
@@ -249,13 +249,13 @@ body {
     color: #6c757d;
     font-size: 0.9rem;
     line-height: 1.5;
-}
+}*/
 
 /* ========================================== */
 /* BUTTONS */
 /* ========================================== */
 
-.btn-custom {
+/*.btn-custom {
     border-radius: 25px;
     padding: 0.75rem 1.5rem;
     font-weight: 500;
@@ -285,13 +285,13 @@ body {
 .btn-custom:hover {
     transform: translateY(-2px);
     box-shadow: 0 4px 15px rgba(0,0,0,0.2);
-}
+}*/
 
 /* ========================================== */
 /* FORMS */
 /* ========================================== */
 
-.form-control {
+/*.form-control {
     border-radius: 8px;
     border: 1px solid #ddd;
     transition: all 0.3s ease;
@@ -314,13 +314,13 @@ body {
 .form-select:focus {
     border-color: #667eea;
     box-shadow: 0 0 0 0.2rem rgba(102, 126, 234, 0.25);
-}
+}*/
 
 /* ========================================== */
 /* TABLES */
 /* ========================================== */
 
-.table {
+/*.table {
     border-radius: 8px;
     overflow: hidden;
     box-shadow: 0 2px 10px rgba(0,0,0,0.1);
@@ -353,13 +353,13 @@ body {
     padding: 1rem 0.75rem;
     vertical-align: middle;
     border: none;
-}
+}*/
 
 /* ========================================== */
 /* CARDS */
 /* ========================================== */
 
-.card {
+/*.card {
     border: none;
     border-radius: 12px;
     box-shadow: 0 2px 10px rgba(0,0,0,0.1);
@@ -382,24 +382,24 @@ body {
     background-color: #f8f9fa;
     border-top: 1px solid #e9ecef;
     border-radius: 0 0 12px 12px !important;
-}
+}*/
 
 /* ========================================== */
 /* BADGES */
 /* ========================================== */
 
-.badge {
+/*.badge {
     font-size: 0.75rem;
     padding: 0.5rem 0.75rem;
     border-radius: 20px;
     font-weight: 500;
-}
+}*/
 
 /* ========================================== */
 /* PAGINATION */
 /* ========================================== */
 
-.pagination {
+/*.pagination {
     margin-top: 2rem;
 }
 
@@ -427,13 +427,13 @@ body {
 .page-item.disabled .page-link {
     color: #6c757d;
     background-color: #f8f9fa;
-}
+}*/
 
 /* ========================================== */
 /* FOOTER */
 /* ========================================== */
 
-.footer {
+/*.footer {
     background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
     color: white;
     text-align: center;
@@ -451,13 +451,13 @@ body {
     color: white;
     text-decoration: underline;
     transform: translateY(-1px);
-}
+}*/
 
 /* ========================================== */
 /* UTILITY CLASSES */
 /* ========================================== */
 
-.text-shadow {
+/*.text-shadow {
     text-shadow: 0 1px 2px rgba(0,0,0,0.3);
 }
 
@@ -468,13 +468,13 @@ body {
 .border-gradient {
     border: 2px solid;
     border-image: linear-gradient(135deg, #667eea 0%, #764ba2 100%) 1;
-}
+}*/
 
 /* ========================================== */
 /* RESPONSIVE DESIGN */
 /* ========================================== */
 
-@media (max-width: 1200px) {
+/*@media (max-width: 1200px) {
     .hero-section h1 {
         font-size: 2.5rem;
     }
@@ -584,13 +584,13 @@ body {
         padding: 0.5rem 0.25rem;
         font-size: 0.8rem;
     }
-}
+}*/
 
 /* ========================================== */
 /* ANIMATIONS */
 /* ========================================== */
 
-@keyframes fadeInUp {
+/*@keyframes fadeInUp {
     from {
         opacity: 0;
         transform: translateY(30px);
@@ -611,10 +611,10 @@ body {
 .fade-in-up.animate {
     opacity: 1;
     transform: translateY(0);
-}
+}*/
 
 /* Staggered animation delays */
-.fade-in-up:nth-child(1) { transition-delay: 0.1s; }
+/*.fade-in-up:nth-child(1) { transition-delay: 0.1s; }
 .fade-in-up:nth-child(2) { transition-delay: 0.2s; }
 .fade-in-up:nth-child(3) { transition-delay: 0.3s; }
 .fade-in-up:nth-child(4) { transition-delay: 0.4s; }
@@ -635,13 +635,13 @@ body {
 
 .pulse {
     animation: pulse 2s infinite;
-}
+}*/
 
 /* ========================================== */
 /* LOADING STATES */
 /* ========================================== */
 
-.loading {
+/*.loading {
     opacity: 0.6;
     pointer-events: none;
 }
@@ -649,13 +649,13 @@ body {
 .spinner-border-sm {
     width: 1rem;
     height: 1rem;
-}
+}*/
 
 /* ========================================== */
 /* ACCESSIBILITY */
 /* ========================================== */
 
-.sr-only {
+/*.sr-only {
     position: absolute;
     width: 1px;
     height: 1px;
@@ -665,18 +665,18 @@ body {
     clip: rect(0, 0, 0, 0);
     white-space: nowrap;
     border: 0;
-}
+}*/
 
 /* Focus styles for better accessibility */
-.btn:focus,
+/*.btn:focus,
 .form-control:focus,
 .form-select:focus {
     outline: 2px solid #667eea;
     outline-offset: 2px;
-}
+}*/
 
 /* High contrast mode support */
-@media (prefers-contrast: high) {
+/*@media (prefers-contrast: high) {
     .btn-custom {
         border: 2px solid currentColor;
     }
@@ -685,10 +685,10 @@ body {
     .vehicle-card {
         border: 2px solid #333;
     }
-}
+}*/
 
 /* Reduced motion support */
-@media (prefers-reduced-motion: reduce) {
+/*@media (prefers-reduced-motion: reduce) {
     * {
         animation-duration: 0.01ms !important;
         animation-iteration-count: 1 !important;
@@ -699,10 +699,1344 @@ body {
         opacity: 1 !important;
         transform: translateY(0) !important;
     }
-}
+}*/
 
 /* Animation performance optimization */
-.fade-in-up {
+/*.fade-in-up {
     backface-visibility: hidden;
     perspective: 1000px;
 }
+
+:root {
+    --bg: #f6f8fb;
+    --primary: #0b3b66;
+    --muted: #6b7280;
+    --card: #ffffff;
+    --radius: 10px;
+    --maxw: 1200px;
+    --gap: 20px;
+    font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+}
+
+html, body {
+    height: 100%;
+    margin: 0;
+    background: var(--bg);
+    color: #102a43
+}
+
+.container {
+    max-width: var(--maxw);
+    margin: 0 auto;
+    padding: 28px
+}*/
+
+/* Hero / layout */
+/*.hero {
+    display: grid;
+    grid-template-columns: 1fr 420px;
+    gap: 28px;
+    align-items: center;
+    padding: 56px 24px;
+    background: linear-gradient(90deg,var(--card),#fbfdff);
+    box-shadow: 0 6px 18px rgba(15,23,42,0.02)
+}
+
+    .hero h1 {
+        font-size: 36px;
+        margin: 0 0 12px;
+        color: var(--primary)
+    }
+
+    .hero p {
+        margin: 0 0 18px;
+        color: var(--muted)
+    }
+
+.cta {
+    display: flex;
+    gap: 12px
+}
+
+.mock-graphic {
+    background: linear-gradient(135deg,rgba(0,163,180,0.08),rgba(11,59,102,0.03));
+    border-radius: 14px;
+    padding: 18px;
+    height: 280px;
+    display: flex;
+    align-items: center;
+    justify-content: center
+}
+
+.stat-grid {
+    display: flex;
+    gap: 12px;
+    margin-top: 18px
+}
+
+.stat {
+    background: var(--card);
+    padding: 12px;
+    border-radius: 10px;
+    min-width: 92px;
+    text-align: center;
+    box-shadow: 0 4px 12px rgba(11,59,102,0.03)
+}*/
+
+/* Features */
+/*.features {
+    display: grid;
+    grid-template-columns: repeat(3,1fr);
+    gap: 18px;
+    padding: 24px
+}
+
+.card {
+    background: var(--card);
+    padding: 18px;
+    border-radius: 12px;
+    box-shadow: 0 8px 20px rgba(11,59,102,0.04)
+}
+
+    .card h3 {
+        margin: 0 0 8px
+    }
+
+    .card p {
+        margin: 0;
+        color: var(--muted);
+        font-size: 14px
+    }*/
+
+/* Solutions */
+/*.solutions {
+    padding: 28px;
+    background: linear-gradient(180deg,#ffffff00,#f4fbfd)
+}
+
+.solutions-grid {
+    display: grid;
+    grid-template-columns: repeat(4,1fr);
+    gap: 14px
+}
+
+.sol {
+    background: linear-gradient(180deg,#fff,#fbfdff);
+    padding: 14px;
+    border-radius: 12px;
+    border: 1px solid rgba(11,59,102,0.03);
+    text-align: center
+}*/
+
+/* Vehicle & feature-card adjustments */
+/*.vehicle-card img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px
+}
+
+.feature-card {
+    background: var(--card);
+    padding: 18px;
+    border-radius: 12px;
+    box-shadow: 0 8px 20px rgba(11,59,102,0.04);
+    height: 100%
+}
+
+.feature-icon {
+    width: 48px;
+    height: 48px;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    margin-bottom: 10px
+}
+
+.btn-custom {
+    border-radius: 8px
+}*/
+
+/* Utilities */
+/*.muted {
+    color: var(--muted)
+}
+
+.mb {
+    margin-bottom: 12px
+}*/
+
+/* Responsive */
+/*@media (max-width:1100px) {
+    .solutions-grid {
+        grid-template-columns: repeat(2,1fr)
+    }
+}
+
+@media (max-width:900px) {
+    .hero {
+        grid-template-columns: 1fr;
+        padding: 28px
+    }
+
+    .mock-graphic {
+        height: 200px
+    }
+
+    .features {
+        grid-template-columns: 1fr
+    }
+
+    .solutions-grid {
+        grid-template-columns: 1fr
+    }
+}*/
+
+/* Sticky footer fix - place this at the end of site.css to override earlier rules */
+/*html, body {
+    height: 100%;
+}*/
+
+/* Ensure body is a column flex container */
+/*body {
+    display: flex !important;
+    flex-direction: column !important;
+    min-height: 100vh !important;
+}*/
+
+/* Let main expand to fill remaining space */
+/*main.main-content,
+.main-content {
+    flex: 1 0 auto !important;*/
+/* remove any fixed/min-height behavior that interferes */
+/*min-height: 0 !important;
+}*/
+
+/* Footer sits after flex children; margin-top:auto also works but not required now */
+/*.footer {
+    margin-top: 0 !important;*/
+/* keep existing appearance */
+/*}*/
+
+/* ==========================================
+   GR8 VEHICLE DEALER - REFACTORED SITE STYLES
+   Organized, deduplicated and responsive
+   Target: .NET 8 Razor Pages project
+   ========================================== */
+
+/* =========================
+   Design tokens / variables
+   ========================= */
+:root {
+    --bg: #f6f8fb;
+    --page-bg: #f8f9fa;
+    --primary-700: #667eea;
+    --primary-800: #764ba2;
+    --primary: #0b3b66;
+    --accent: #00a3b4;
+    --muted: #6b7280;
+    --card: #ffffff;
+    --radius: 12px;
+    --radius-sm: 8px;
+    --maxw: 1200px;
+    --gap: 20px;
+    --navbar-height: 70px;
+    --font-sans: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+}
+
+/* =========================
+   Global reset / base
+   ========================= */
+* {
+    box-sizing: border-box;
+}
+
+html {
+    font-size: 14px;
+    scroll-behavior: smooth;
+    height: 100%;
+}
+
+body {
+    min-height: 100vh;
+    margin: 0;
+    padding: 0;
+    padding-top: var(--navbar-height);
+    background: var(--page-bg);
+    color: #102a43;
+    font-family: var(--font-sans);
+    line-height: 1.6;
+    display: flex;
+    flex-direction: column;
+}
+
+.container {
+    max-width: var(--maxw);
+    margin: 0 auto;
+    padding: 28px;
+}
+
+/* =========================
+   Small utilities
+   ========================= */
+.muted {
+    color: var(--muted);
+}
+
+.mb {
+    margin-bottom: 12px;
+}
+
+.text-shadow {
+    text-shadow: 0 1px 2px rgba(0,0,0,0.15);
+}
+
+.shadow-custom {
+    box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+}
+
+/* =========================
+   Navigation / header
+   ========================= */
+.navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: var(--navbar-height);
+    display: flex;
+    align-items: center;
+    background: #ffffff;
+    color: #0b3b66;
+    box-shadow: 0 2px 15px rgba(0,0,0,0.08);
+    z-index: 1100;
+    padding: 0.5rem 0;
+}
+
+.navbar-brand {
+    font-weight: 700;
+    font-size: 1.3rem;
+    color: #fff !important;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.navbar-toggler {
+    border: none;
+    color: white;
+    background: transparent;
+    display: inline-flex; /* default shown on small screens, hidden on desktop via media query */
+    align-items: center;
+    justify-content: center;
+    padding: 0.5rem;
+}
+
+/* Nav links */
+.navbar-nav {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.nav-link {
+    font-weight: 500;
+    color: rgba(255,255,255,0.92) !important;
+    padding: 0.5rem 1rem !important;
+    border-radius: 5px;
+    margin: 0 4px;
+}
+
+    .nav-link:hover {
+        color: #ffc107 !important;
+        background-color: rgba(255,255,255,0.06);
+        transform: translateY(-1px);
+    }
+
+/* =========================
+   Layout - main / footer
+   ========================= */
+main.main-content, .main-content {
+    flex: 1 0 auto;
+    padding: 0;
+    min-height: 0;
+}
+
+.footer {
+    padding: 32px 0;
+    color: #fff;
+    background: #000000;
+    border-top: 1px solid rgba(255,255,255,0.04);
+    font-size: 0.95rem;
+}
+
+    .footer .navbar-brand {
+        color: #ffc107 !important;
+    }
+
+    .footer .footer-links a {
+        color: rgba(255,255,255,0.85);
+        text-decoration: none;
+        transition: color .15s, transform .15s;
+    }
+
+        .footer .footer-links a:hover {
+            color: #ffd966;
+            transform: translateY(-2px);
+            text-decoration: none;
+        }
+
+    .footer h6 {
+        color: #ffd966;
+        margin-bottom: 0.5rem;
+        font-weight: 700;
+    }
+
+/* =========================
+   Hero / Top section
+   ========================= */
+.hero, .hero-section {
+    display: grid;
+    grid-template-columns: 1fr 420px;
+    gap: 28px;
+    align-items: center;
+    padding: 56px 24px;
+    background: linear-gradient(135deg,var(--primary-700),var(--primary-800));
+    color: white;
+    position: relative;
+    overflow: hidden;
+    margin-top: 0;
+    padding-top: calc(var(--navbar-height) + 40px);
+}
+
+    .hero-section::before, .hero::before {
+        content: '';
+        position: absolute;
+        inset: 0;
+        background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grain" width="100" height="100" patternUnits="userSpaceOnUse"><circle cx="25" cy="25" r="1" fill="white" opacity="0.08"/><circle cx="75" cy="75" r="1" fill="white" opacity="0.08"/></pattern></defs><rect width="100" height="100" fill="url(%23grain)"/>') center/auto repeat;
+        opacity: 0.18;
+        pointer-events: none;
+    }
+
+    .hero h1, .hero-section h1 {
+        font-size: 3rem;
+        margin: 0 0 1rem;
+        font-weight: 700;
+        text-shadow: 0 2px 4px rgba(0,0,0,0.25);
+        color: var(--card);
+    }
+
+    .hero .lead, .hero-section .lead {
+        font-size: 1.25rem;
+        margin-bottom: 2rem;
+        color: rgba(255,255,255,0.95);
+    }
+
+    /* Hero visuals */
+    .mock-graphic, .hero .mock-graphic, .hero-section .mock-graphic {
+        background: linear-gradient(135deg, rgba(0,163,180,0.06), rgba(11,59,102,0.03));
+        border-radius: 14px;
+        padding: 18px;
+        height: 280px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+        .mock-graphic img, .hero img.img-fluid, .hero-section img.img-fluid {
+            border-radius: 8px;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+            display: block;
+            width: 100%;
+            max-width: 420px;
+            height: auto;
+            max-height: 300px;
+            object-fit: cover;
+            margin: 0 auto;
+        }
+
+/* =========================
+   Feature cards / solutions
+   ========================= */
+.features {
+    display: grid;
+    grid-template-columns: repeat(3,1fr);
+    gap: 18px;
+    padding: 24px 0;
+    align-items: start;
+}
+
+    .features .feature-card, .features .card {
+        background: #fff;
+        padding: 26px 28px;
+        border-radius: 16px;
+        min-height: 160px;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        box-shadow: 0 12px 28px rgba(11,59,102,0.06);
+        transition: transform .18s ease, box-shadow .18s ease;
+    }
+
+        .features .feature-card:hover, .features .card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 20px 48px rgba(11,59,102,0.08);
+        }
+
+        .features .feature-card .feature-icon {
+            width: 56px;
+            height: 56px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 0 12px;
+        }
+
+/* Vehicle cards */
+.vehicle-card {
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    border-radius: 12px;
+    box-shadow: 0 12px 30px rgba(11,59,102,0.06);
+    background: #fff;
+    transition: transform .18s ease, box-shadow .18s ease;
+}
+
+    .vehicle-card img {
+        width: 100%;
+        height: 220px;
+        object-fit: cover;
+        border-top-left-radius: 12px;
+        border-top-right-radius: 12px;
+        display: block;
+    }
+
+    .vehicle-card .card-body {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        padding: 18px;
+    }
+
+/* Solutions grid */
+.solutions-grid {
+    display: grid;
+    grid-template-columns: repeat(4,1fr);
+    gap: 20px;
+}
+
+.sol {
+    background: #fff;
+    padding: 20px;
+    border-radius: 12px;
+    border: 1px solid rgba(11,59,102,0.03);
+    box-shadow: 0 8px 20px rgba(11,59,102,0.03);
+    min-height: 120px;
+}
+
+/* =========================
+   Buttons / form resets
+   ========================= */
+.btn-primary, .btn.btn-primary, .btn.btn-outline-secondary {
+    background-color: #0d6efd;
+    border-color: #0d6efd;
+    color: #fff;
+}
+
+/* =========================
+   Responsive rules
+   ========================= */
+
+/* Tablet / small desktop adjustments */
+@media (max-width: 992px) {
+    /* show hamburger */
+    .navbar-toggler {
+        display: inline-flex !important;
+    }
+
+    /* collapse becomes panel under navbar */
+    .navbar-collapse {
+        position: absolute;
+        top: var(--navbar-height);
+        left: 0;
+        right: 0;
+        background: #fff;
+        padding: 12px 16px;
+        box-shadow: 0 10px 30px rgba(11,59,102,0.12);
+    }
+
+    .navbar-nav {
+        flex-direction: column !important;
+        gap: 8px;
+    }
+
+    /* hero spacing */
+    .hero, .hero-section {
+        padding-top: calc(var(--navbar-height) + 20px);
+    }
+
+        /* reduce some image heights on smaller viewports */
+        .mock-graphic img, .hero img.img-fluid {
+            max-width: 320px;
+            max-height: 220px;
+        }
+
+    .vehicle-card img {
+        height: 180px;
+    }
+}
+
+/* Mobile narrow */
+@media (max-width:576px) {
+    .mock-graphic img, .hero img.img-fluid {
+        max-width: 260px;
+        max-height: 160px;
+    }
+
+    .features {
+        gap: 16px;
+        grid-template-columns: 1fr;
+    }
+
+    .vehicle-card img {
+        height: 150px;
+    }
+
+    .feature-card h6, .feature-card h5, .feature-card h3, .feature-card p {
+        margin-left: 0;
+    }
+
+    .feature-card .feature-icon {
+        position: relative;
+        top: 0;
+        left: 0;
+        margin-bottom: 8px;
+    }
+}
+
+/* Desktop wide screens: hide hamburger, show nav inline */
+@media (min-width:993px) {
+    .navbar-toggler {
+        display: none !important;
+        visibility: hidden !important;
+        pointer-events: none !important;
+    }
+
+    .navbar-collapse {
+        position: static !important;
+        display: flex !important;
+        background: transparent !important;
+        box-shadow: none !important;
+        padding: 0 !important;
+    }
+
+    .navbar-nav {
+        flex-direction: row !important;
+        align-items: center !important;
+        gap: 12px;
+    }
+
+    .hero, .hero-section {
+        padding-top: calc(var(--navbar-height) + 24px);
+    }
+}
+
+/* Small mobile-only header nudge (keeps brand/toggler higher on small screens) */
+@media (max-width:992px) {
+    .navbar {
+        align-items: flex-start;
+        padding-top: 0.25rem;
+        padding-bottom: 0.25rem;
+    }
+
+        .navbar .navbar-brand, .navbar .navbar-toggler {
+            transform: translateY(-6px);
+            transition: transform .12s ease;
+        }
+}
+
+/* Accessibility / reduced motion */
+@media (prefers-reduced-motion: reduce) {
+    * {
+        transition-duration: 0.01ms !important;
+        animation-duration: 0.01ms !important;
+    }
+}
+
+/* ---- Fix: remove top stripe on feature cards and restore badge layout ---- */
+.features .feature-card::before,
+.feature-card::before {
+    display: none !important;
+    content: none !important;
+}
+
+/* Ensure feature-card visual baseline */
+.features .feature-card {
+    background: #fff !important;
+    padding: 1.25rem 1.5rem !important;
+    border: 0 !important;
+    border-radius: 12px !important;
+    position: relative;
+    overflow: visible;
+    box-shadow: 0 12px 28px rgba(11,59,102,0.06) !important;
+}
+
+    /* Badge / icon at top-left inside card */
+    .features .feature-card .feature-icon {
+        position: absolute;
+        top: 12px;
+        left: 16px;
+        width: 40px;
+        height: 40px;
+        border-radius: 8px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.05rem;
+        color: #fff;
+        z-index: 3;
+        box-shadow: 0 6px 18px rgba(11,59,102,0.06);
+    }
+
+    /* Reserve space so title/description don't overlap the badge */
+    .features .feature-card h5,
+    .features .feature-card h6,
+    .features .feature-card h3 {
+        margin-left: 60px;
+        margin-top: 4px;
+        color: #0b3b66;
+        font-weight: 700;
+    }
+
+    /* Description text inside card */
+    .features .feature-card p {
+        margin-left: 60px;
+        margin-top: 8px;
+        color: var(--muted);
+        line-height: 1.5;
+    }
+
+    /* Make sure anchors inside cards don't display full width colored background */
+    .features .feature-card a {
+        display: inline-block;
+        color: inherit;
+        text-decoration: none;
+    }
+
+    /* ---- Patch: prevent full-width colored stripe on feature cards ---- */
+    /* Hide any stray decorative ::before stripe (extra safety) */
+    .features .feature-card::before,
+    .feature-card::before {
+        display: none !important;
+        content: none !important;
+    }
+
+    /* Force icon to be a small badge (prevent it stretching to full width) */
+    .features .feature-card .feature-icon,
+    .feature-card .feature-icon {
+        position: absolute !important;
+        top: 12px !important;
+        left: 16px !important;
+        width: 40px !important;
+        height: 40px !important;
+        min-width: 40px !important;
+        min-height: 40px !important;
+        display: inline-flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        border-radius: 8px !important;
+        box-shadow: 0 6px 18px rgba(11,59,102,0.06) !important;
+        background-clip: padding-box !important;
+        z-index: 3 !important;
+        padding: 0.25rem !important; /* keep icon centered */
+    }
+
+/* Make sure card reserves space for the absolute badge so title doesn't overlap */
+.features .feature-card,
+.feature-card {
+    position: relative !important;
+    padding-top: 1.25rem !important; /* keep original vertical padding */
+    padding-left: 1.25rem !important; /* base left padding */
+}
+
+    /* Shift textual headings/descriptions so they don't overlap the badge */
+    .features .feature-card h5,
+    .features .feature-card h6,
+    .features .feature-card h3,
+    .feature-card h5,
+    .feature-card h6 {
+        margin-left: 60px !important;
+    }
+
+    /* Descriptions align with the headings */
+    .features .feature-card p,
+    .feature-card p {
+        margin-left: 60px !important;
+    }
+
+    /* If the icon contains an <i> (bootstrap icon), make it scale correctly */
+    .features .feature-card .feature-icon i,
+    .feature-card .feature-icon i {
+        font-size: 1.05rem !important;
+        line-height: 1 !important;
+    }
+
+    /* Ensure linked cards (wrapped in <a>) don't get colored background */
+    .feature-card a,
+    a .feature-card {
+        background: transparent !important;
+        color: inherit !important;
+        text-decoration: none !important;
+    }
+
+/* ---- Hero stats: show as compact white cards (matches reference) ---- */
+.hero .stat-grid,
+.hero-section .stat-grid {
+    display: flex;
+    gap: 16px;
+    align-items: stretch;
+    flex-wrap: wrap; /* wrap on narrow screens */
+    margin: 18px 0 0 0;
+}
+
+/* Individual stat card */
+.hero .stat,
+.hero-section .stat {
+    background: #ffffff; /* white card */
+    color: #0b3b66; /* primary text color */
+    border-radius: 12px;
+    padding: 18px 20px;
+    box-shadow: 0 8px 20px rgba(11,59,102,0.06);
+    min-width: 150px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+}
+
+    /* primary number / value */
+    .hero .stat > div:first-child,
+    .hero-section .stat > div:first-child,
+    .hero .stat strong,
+    .hero-section .stat strong {
+        font-weight: 700;
+        font-size: 1.25rem;
+        color: #0b3b66;
+        line-height: 1.05;
+    }
+
+    /* label (muted) */
+    .hero .stat .muted,
+    .hero-section .stat .muted {
+        color: #61707a;
+        font-weight: 400;
+        margin-top: 6px;
+        font-size: 1rem;
+        line-height: 1.2;
+    }
+
+/* small screens: make cards full width stacked */
+@media (max-width: 576px) {
+    .hero .stat,
+    .hero-section .stat {
+        min-width: 100%;
+        padding: 14px 16px;
+        border-radius: 10px;
+    }
+
+        .hero .stat > div:first-child,
+        .hero-section .stat > div:first-child {
+            font-size: 1.15rem;
+        }
+}
+
+/* ---- Remove outer frame around hero mock-graphic and inset the image ---- */
+.mock-graphic.card,
+.hero-section .mock-graphic.card,
+.hero .mock-graphic.card {
+    /* remove Bootstrap card visual */
+    background: transparent !important;
+    border: none !important;
+    box-shadow: none !important;
+    /* create an inner gutter so the image sits away from the hero edges */
+    padding: 22px 28px !important;
+    border-radius: 16px; /* keeps soft outer radius if desired */
+    overflow: visible;
+}
+
+    /* remove any decorative ::before that may draw a stripe/outline */
+    .mock-graphic.card::before,
+    .hero-section .mock-graphic.card::before {
+        display: none !important;
+        content: none !important;
+    }
+
+/* image styling: keep it slightly inset, rounded and with subtle shadow */
+.mock-graphic img,
+.hero img.img-fluid,
+.hero-section img.img-fluid {
+    display: block;
+    width: 100%;
+    height: auto;
+    max-height: 300px;
+    object-fit: cover;
+    margin: 0; /* flush inside the gutter from parent padding */
+    border-radius: 10px; /* inner image corner */
+    box-shadow: 0 10px 30px rgba(0,0,0,0.12);
+}
+
+/* small screens: reduce padding so layout remains balanced */
+@media (max-width: 768px) {
+    .mock-graphic.card,
+    .hero-section .mock-graphic.card,
+    .hero .mock-graphic.card {
+        padding: 12px 14px !important;
+        border-radius: 12px;
+    }
+
+    .mock-graphic img,
+    .hero img.img-fluid,
+    .hero-section img.img-fluid {
+        border-radius: 8px;
+        max-height: 220px;
+    }
+}
+
+/* ---- Quick Actions: convert feature cards into left‑icon blocks ----
+   Overrides previous absolute/stripe rules so cards become compact blocks
+   with icon square on the left and text on the right. Keep responsive. */
+.feature-card {
+    display: flex !important;
+    align-items: center !important;
+    gap: 16px !important;
+    padding: 18px 20px !important;
+    background: #fff !important;
+    border-radius: 12px !important;
+    box-shadow: 0 8px 24px rgba(11,59,102,0.06) !important;
+    min-height: 88px !important;
+    transition: transform .18s ease, box-shadow .18s ease;
+    text-decoration: none !important; /* for linked cards */
+    color: inherit !important;
+}
+
+    /* Reset any previous absolute positioning */
+    .feature-card .feature-icon,
+    .features .feature-card .feature-icon,
+    .feature-card .feature-icon i {
+        position: relative !important;
+        top: auto !important;
+        left: auto !important;
+        width: 56px !important;
+        height: 56px !important;
+        min-width: 56px !important;
+        min-height: 56px !important;
+        border-radius: 12px !important;
+        display: inline-flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        margin: 0 !important;
+        padding: 0 !important;
+        font-size: 1.25rem !important;
+        box-shadow: 0 6px 18px rgba(11,59,102,0.06) !important;
+        flex: 0 0 56px !important;
+    }
+
+    /* Text area — heading and description */
+    .feature-card h5,
+    .feature-card h6,
+    .feature-card h3 {
+        margin: 0;
+        font-weight: 700;
+        color: var(--primary) !important;
+        line-height: 1.15;
+    }
+
+    .feature-card p {
+        margin: 6px 0 0 0;
+        color: var(--muted);
+        font-weight: 400;
+    }
+
+    /* Hover lift */
+    .feature-card:hover {
+        transform: translateY(-6px);
+        box-shadow: 0 20px 48px rgba(11,59,102,0.08) !important;
+    }
+
+    /* If feature cards are inside anchors (linked blocks) make the whole block interactive */
+    a.text-decoration-none .feature-card,
+    .feature-card a {
+        display: flex !important;
+        width: 100%;
+        color: inherit !important;
+        text-decoration: none !important;
+    }
+
+/* Responsive: on very small screens keep comfortable padding and smaller icon */
+@media (max-width: 576px) {
+    .feature-card {
+        padding: 12px 14px !important;
+        min-height: 72px !important;
+    }
+
+        .feature-card .feature-icon {
+            width: 48px !important;
+            height: 48px !important;
+            min-width: 48px !important;
+            min-height: 48px !important;
+            border-radius: 10px !important;
+            font-size: 1.05rem !important;
+            flex: 0 0 48px !important;
+        }
+
+        .feature-card h5,
+        .feature-card h6 {
+            font-size: 1rem;
+        }
+}
+
+/* Ensure feature grid spacing looks consistent */
+.row.g-4 > [class*="col-"] .feature-card {
+    height: auto;
+}
+
+/* Car feature: outer background shows page gutters, inner container shows gradient */
+/*.bg-light-custom {
+    background: var(--page-bg);
+    color: #fff;
+    padding: 48px 0;
+    overflow: visible;
+}*/
+
+    /* Inner container becomes the gradient panel centered with rounded corners */
+    /*.bg-light-custom > .container {
+        background: #000000;
+        padding: 40px;
+        box-shadow: 0 12px 40px rgba(11,59,102,0.06);
+    }*/
+
+    /* Headings stay white on the gradient panel */
+    /*.bg-light-custom .section-title,
+    .bg-light-custom .section-subtitle {
+        color: #fff;
+    }*/
+
+    /* Cards remain white so they stand out on the gradient */
+    /*.bg-light-custom .card,
+    .bg-light-custom .vehicle-card,
+    .bg-light-custom .feature-card {
+        background: #fff;
+        color: initial;
+    }*/
+
+/* Full-bleed black background: section provides the color, container stays constrained */
+.bg-light-custom {
+    background: #000; /* full-width black */
+    color: #fff;
+    padding: 48px 0;
+    overflow: visible;
+}
+
+    /* Keep inner container centered and constrained — make it transparent so section fills edges */
+    .bg-light-custom > .container {
+        background: transparent;
+        padding: 40px;
+        box-shadow: 0 12px 40px rgba(11,59,102,0.06);
+        max-width: var(--maxw);
+        margin: 0 auto;
+        border-radius: 12px; /* optional, remove if you don't want rounded inner panel */
+    }
+
+/* Headings stay white on the gradient panel */
+.bg-light-custom .section-title,
+    .bg-light-custom .section-subtitle {
+        color: #fff;
+    }
+
+/* Cards remain white so they stand out on the gradient */
+.bg-light-custom .card,
+    .bg-light-custom .vehicle-card,
+    .bg-light-custom .feature-card {
+        background: #fff;
+        color: initial;
+    }
+
+@media (max-width: 992px) {
+    .bg-light-custom > .container {
+        padding: 24px;
+        border-radius: 10px;
+    }
+}
+
+/* Responsive: reduce inner padding on small screens */
+@media (max-width: 992px) {
+    .bg-light-custom > .container {
+        padding: 24px;
+        border-radius: 10px;
+    }
+}
+
+/* Navbar — white style overrides */
+.navbar {
+    background: #ffffff !important;
+    color: var(--primary) !important;
+    box-shadow: 0 2px 15px rgba(0,0,0,0.06);
+}
+
+    /* Brand and links */
+    .navbar .navbar-brand {
+        color: var(--primary) !important;
+    }
+
+    .navbar .nav-link {
+        color: rgba(11,59,102,0.9) !important; /* dark links */
+    }
+
+        .navbar .nav-link:hover,
+        .navbar .nav-link:focus {
+            color: var(--primary-700) !important;
+            background: rgba(11,59,102,0.03);
+        }
+
+/* Toggler icon (mobile) — ensure visible on white */
+.navbar-toggler {
+    border: none;
+    color: rgba(11,59,102,0.9);
+}
+
+    .navbar-toggler .navbar-toggler-icon {
+        filter: none; /* if you previously applied color filters */
+    }
+
+/* If you used .text-white on navbar children remove or override */
+.navbar .text-white {
+    color: inherit !important;
+}
+
+/* Replace existing .hero rule with this to blur the background image */
+.hero {
+    position: relative;
+    overflow: hidden;
+    min-height: 420px;
+    display: grid;
+    align-items: center;
+    padding-top: calc(var(--navbar-height) + 40px);
+    color: white;
+    /* remove background-image from the main rule — handled in ::before/::after */
+}
+
+    /* blurred background image layer */
+    .hero::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background-image: url('https://images.unsplash.com/photo-1563720223185-11003d516935?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80');
+        background-position: center right;
+        background-size: cover;
+        background-repeat: no-repeat;
+        filter: blur(2px) brightness(0.92); /* change blur amount here */
+        -webkit-filter: blur(2px) brightness(0.92);
+        transform: scale(1.03); /* hide blurred edges */
+        z-index: 0;
+        will-change: filter, transform;
+    }
+
+    /* gradient overlay (tint) */
+    .hero::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: rgba(0,0,0,0.75);
+        z-index: 1;
+        pointer-events: none;
+    }
+
+    /* keep hero content above image + overlay */
+    .hero > * {
+        position: relative;
+        z-index: 2;
+    }
+
+/* nếu bạn vẫn muốn dùng the mock-graphic on large screens, hide it there (we already used d-lg-none) */
+.mock-graphic.d-lg-none {
+    display: none !important; /* ensures markup image won't overlap desktop background */
+}
+
+/* Responsive additions for hero, grids, .bg-light-custom and images */
+
+/* Large desktops -> slightly tighter layout */
+@media (max-width: 1200px) {
+    .container {
+        padding: 24px;
+    }
+
+    .solutions-grid {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 18px;
+    }
+
+    .features {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 16px;
+    }
+
+    .bg-light-custom > .container {
+        padding: 32px;
+        border-radius: 10px;
+    }
+}
+
+/* Tablet / small desktop */
+@media (max-width: 992px) {
+    /* layout */
+    .hero, .hero-section {
+        grid-template-columns: 1fr; /* stack hero content + visual */
+        padding: 36px 20px;
+        gap: 18px;
+    }
+
+        .hero h1, .hero-section h1 {
+            font-size: 2.25rem;
+        }
+
+        .hero .lead, .hero-section .lead {
+            font-size: 1.05rem;
+        }
+
+    /* grids */
+    .solutions-grid, .features {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 16px;
+    }
+
+    /* container */
+    .bg-light-custom > .container {
+        padding: 24px;
+        border-radius: 8px;
+        box-shadow: 0 10px 30px rgba(11,59,102,0.05);
+    }
+
+    /* images */
+    .vehicle-card img {
+        height: 180px;
+    }
+
+    .mock-graphic img, .hero img.img-fluid {
+        max-width: 360px;
+        max-height: 240px;
+    }
+
+    /* reduce heavy blur for performance */
+    .hero::before {
+        filter: blur(1.5px) brightness(0.95);
+        -webkit-filter: blur(1.5px) brightness(0.95);
+    }
+}
+
+/* Small tablets / large phones */
+@media (max-width: 768px) {
+    .container {
+        padding: 18px;
+    }
+
+    .solutions-grid, .features {
+        grid-template-columns: 1fr;
+        gap: 14px;
+    }
+
+    .bg-light-custom {
+        padding: 20px 0;
+    }
+
+        .bg-light-custom > .container {
+            padding: 18px;
+            border-radius: 6px;
+            box-shadow: none;
+        }
+
+    .hero, .hero-section {
+        padding: 24px 16px;
+        gap: 12px;
+    }
+
+        .hero h1, .hero-section h1 {
+            font-size: 1.75rem;
+            line-height: 1.15;
+        }
+
+        .hero .lead, .hero-section .lead {
+            font-size: 1rem;
+        }
+
+    .vehicle-card img {
+        height: 160px;
+    }
+
+    .mock-graphic img, .hero img.img-fluid {
+        max-width: 320px;
+        max-height: 200px;
+    }
+
+    /* further reduce filters on mobile */
+    .hero::before {
+        filter: blur(1px) brightness(0.98);
+        -webkit-filter: blur(1px) brightness(0.98);
+    }
+}
+
+/* Narrow phones */
+@media (max-width: 576px) {
+    /* flush inner panel to edges if desired */
+    .bg-light-custom > .container {
+        padding: 12px;
+        border-radius: 0; /* remove inner rounding for full-width feel */
+        max-width: 100%;
+        margin: 0;
+    }
+
+    .container {
+        padding: 12px;
+    }
+
+    .hero, .hero-section {
+        padding-top: calc(var(--navbar-height) + 16px);
+        padding-bottom: 18px;
+    }
+
+        .hero h1, .hero-section h1 {
+            font-size: 1.5rem;
+        }
+
+        .hero .lead, .hero-section .lead {
+            font-size: 0.95rem;
+        }
+
+    .vehicle-card img {
+        height: 140px;
+    }
+
+    .mock-graphic img, .hero img.img-fluid {
+        max-width: 260px;
+        max-height: 160px;
+    }
+
+    /* disable heavy shadows and keep layout light */
+    .bg-light-custom > .container, .features .feature-card, .vehicle-card, .sol {
+        box-shadow: 0 6px 18px rgba(11,59,102,0.04);
+    }
+
+    /* hide decorative grain overlay (if present) for best performance */
+    .hero-section::before, .hero::before {
+        opacity: 0.06;
+    }
+}
+

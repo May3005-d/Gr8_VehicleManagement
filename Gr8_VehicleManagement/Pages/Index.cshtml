@@ -1,4 +1,4 @@
-﻿@page
+﻿@* @page
 @model IndexModel
 @{
     ViewData["Title"] = "Home page";
@@ -231,3 +231,183 @@
         </div>
     </div>
 </div>
+ *@
+
+@page
+@model IndexModel
+@{
+    ViewData["Title"] = "Home page";
+}
+
+<main>
+    <header class="hero" role="banner">
+        <div class="container">
+            <div>
+                <h1>Digital tools for modern automotive retail</h1>
+                <p class="mb">Hệ thống quản lý đại lý xe điện hiện đại và chuyên nghiệp</p>
+
+                <div class="cta">
+                    <a class="btn btn-primary btn-lg" asp-page="/Vehicles/Index"><i class="bi bi-car-front me-2"></i>Xem Xe</a>
+                    <a class="btn btn-outline-secondary btn-lg" asp-page="/Account/Login"><i class="bi bi-box-arrow-in-right me-2"></i>Đăng Nhập</a>
+                </div>
+
+                <div class="stat-grid" style="margin-top:18px">
+                    <div class="stat">
+                        <div style="font-weight:700">1,200+</div>
+                        <div class="muted">Customers</div>
+                    </div>
+                    <div class="stat">
+                        <div style="font-weight:700">99.9%</div>
+                        <div class="muted">Uptime</div>
+                    </div>
+                    <div class="stat">
+                        <div style="font-weight:700">24/7</div>
+                        <div class="muted">Support</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- giữ ảnh markup nhưng chỉ hiển thị trên màn hình nhỏ -->
+            <div class="mock-graphic card d-lg-none" aria-hidden="true">
+                <div style="text-align:center;color:var(--primary)">
+                    <img src="https://images.unsplash.com/photo-1563720223185-11003d516935?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" class="img-fluid rounded" alt="EV demo" style="max-height:300px" />
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Features (kept your content, layout adjusted to demo grid) -->
+    <section class="features container" aria-labelledby="features">
+        <article class="card">
+            <h3>Retail Management</h3>
+            <p>Tools to manage inventory, pricing, and deals across locations with consolidated reporting.</p>
+        </article>
+
+        <article class="card">
+            <h3>Customer Experience</h3>
+            <p>Personalized journeys and messaging that keep customers engaged before and after purchase.</p>
+        </article>
+
+        <article class="card">
+            <h3>Service & Parts</h3>
+            <p>Streamline appointments, service history, and parts ordering with integrated workflows.</p>
+        </article>
+    </section>
+
+    <!-- Platform capabilities: giữ nội dung mục "Tính năng" nhưng dùng lớp .solutions -->
+    <section id="solutions" class="solutions">
+        <div class="container">
+            <h2 style="margin-top:0;color:var(--primary)">Platform capabilities</h2>
+            <div class="solutions-grid">
+                <div class="sol"><strong>Inventory</strong><div class="muted">Real-time stock & pricing</div></div>
+                <div class="sol"><strong>Sales Desk</strong><div class="muted">Deal structuring & eSigning</div></div>
+                <div class="sol"><strong>Service</strong><div class="muted">Scheduling & tech workflows</div></div>
+                <div class="sol"><strong>Analytics</strong><div class="muted">Cross-channel reports</div></div>
+            </div>
+        </div>
+    </section>
+
+    
+    <!-- Keep your Vehicle Showcase and Quick Actions content unchanged (just wrapped in container) -->
+    <div class="bg-light-custom">
+        <div class="container py-5">
+            <div class="row mb-5">
+                <div class="col-12">
+                    <h2 class="section-title">Xe Điện Nổi Bật</h2>
+                    <p class="section-subtitle">Khám phá những mẫu xe điện mới nhất</p>
+                </div>
+            </div>
+
+            <div class="row g-4">
+                <!-- existing vehicle cards kept as-is -->
+                <div class="col-lg-4 col-md-6">
+                    <div class="vehicle-card">
+                        <img src="https://images.unsplash.com/photo-1593941707882-a5bac6861d75?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80" alt="Tesla Model 3" class="img-fluid">
+                        <div class="p-3">
+                            <h5 class="fw-bold">Tesla Model 3</h5>
+                            <p class="text-muted small">Xe điện sedan cao cấp với công nghệ tiên tiến</p>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <span class="h6 text-primary mb-0">$45,000</span>
+                                <a href="/Vehicles" class="btn btn-primary btn-custom">Xem Chi Tiết</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- other vehicle cards... keep your existing ones -->
+                <div class="col-lg-4 col-md-6">
+                    <div class="vehicle-card">
+                        <img src="https://images.unsplash.com/photo-1606664515524-ed2f786a0bd6?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80" alt="BMW iX" class="img-fluid">
+                        <div class="p-3">
+                            <h5 class="fw-bold">BMW iX</h5>
+                            <p class="text-muted small">SUV điện sang trọng với nội thất cao cấp</p>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <span class="h6 text-primary mb-0">$85,000</span>
+                                <a href="/Vehicles" class="btn btn-primary btn-custom">Xem Chi Tiết</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-4 col-md-6">
+                    <div class="vehicle-card">
+                        <img src="https://images.unsplash.com/photo-1617788138017-80ad40651399?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80" alt="Audi e-tron" class="img-fluid">
+                        <div class="p-3">
+                            <h5 class="fw-bold">Audi e-tron</h5>
+                            <p class="text-muted small">Crossover điện với thiết kế thể thao</p>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <span class="h6 text-primary mb-0">$65,000</span>
+                                <a href="/Vehicles" class="btn btn-primary btn-custom">Xem Chi Tiết</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Quick Actions kept -->
+    <div class="container py-5">
+        <div class="row mb-5">
+            <div class="col-12">
+                <h2 class="access-title">Truy Cập Nhanh</h2>
+                <p class="access-subtitle">Các chức năng quan trọng nhất</p>
+            </div>
+        </div>
+
+        <div class="row g-4">
+            <div class="col-lg-3 col-md-6">
+                <a href="/Customers" class="text-decoration-none">
+                    <div class="feature-card">
+                        <div class="feature-icon bg-primary"><i class="bi bi-people"></i></div>
+                        <h6 class="fw-bold">Khách Hàng</h6>
+                    </div>
+                </a>
+            </div>
+            <div class="col-lg-3 col-md-6">
+                <a href="/Dashboard" class="text-decoration-none">
+                    <div class="feature-card">
+                        <div class="feature-icon bg-success"><i class="bi bi-speedometer2"></i></div>
+                        <h6 class="fw-bold">Dashboard</h6>
+                    </div>
+                </a>
+            </div>
+            <div class="col-lg-3 col-md-6">
+                <a href="/Account/Login" class="text-decoration-none">
+                    <div class="feature-card">
+                        <div class="feature-icon bg-warning"><i class="bi bi-box-arrow-in-right"></i></div>
+                        <h6 class="fw-bold">Đăng Nhập</h6>
+                    </div>
+                </a>
+            </div>
+            <div class="col-lg-3 col-md-6">
+                <a href="/Vehicles" class="text-decoration-none">
+                    <div class="feature-card">
+                        <div class="feature-icon bg-info"><i class="bi bi-car-front"></i></div>
+                        <h6 class="fw-bold">Xem Xe</h6>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </div>
+</main>

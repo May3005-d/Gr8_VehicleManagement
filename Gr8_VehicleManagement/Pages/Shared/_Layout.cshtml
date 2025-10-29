@@ -11,7 +11,7 @@
 </head>
 <body>
     <header>
-        <nav class="navbar navbar-expand-lg navbar-dark bg-primary fixed-top">
+        <nav class="navbar navbar-expand-lg navbar-light bg-white fixed-top">
             <div class="container">
                 <a class="navbar-brand fw-bold" asp-area="" asp-page="/Index">
                     <i class="bi bi-car-front me-2"></i>Gr8 Vehicle Dealer
@@ -50,11 +50,14 @@
                     <ul class="navbar-nav">
                         @if (Context.Session.IsAuthenticated())
                         {
+                          @if (!Context.Session.IsCustomer())
+                          {
                             <li class="nav-item">
                                 <a class="nav-link" asp-area="" asp-page="/Dashboard/Index">
                                     <i class="bi bi-speedometer2 me-1"></i>Dashboard
                                 </a>
                             </li>
+                          }
                             <li class="nav-item">
                                 <a class="nav-link" asp-area="" asp-page="/Account/Profile">
                                     <i class="bi bi-person-circle me-1"></i>Profile
@@ -89,7 +92,7 @@
         @RenderBody()
     </main>
 
-    <footer class="footer">
+    @* <footer class="footer">
         <div class="container">
             <div class="row">
                 <div class="col-md-6">
@@ -111,6 +114,64 @@
                         </a>
                     </div>
                     <small class="text-white-50">© 2025 - Gr8 Vehicle Dealer System</small>
+                </div>
+            </div>
+        </div>
+    </footer> *@
+
+    <!-- Refreshed footer: cleaner structure, responsive columns, call-to-action and socials -->
+    <footer class="footer">
+        <div class="container">
+            <div class="row gy-4 align-items-center">
+                <div class="col-md-4">
+                    <a class="navbar-brand fw-bold d-inline-flex align-items-center text-warning" asp-area="" asp-page="/Index">
+                        <i class="bi bi-car-front me-2"></i>Gr8 Vehicle Dealer
+                    </a>
+                    <p class="text-white-50 mt-2 mb-0">Hệ thống quản lý đại lý xe điện hiện đại và chuyên nghiệp</p>
+                </div>
+
+                <div class="col-md-4">
+                    <div class="row">
+                        <div class="col-6">
+                            <h6 class="text-warning mb-2">Sản phẩm</h6>
+                            <ul class="list-unstyled footer-links mb-0">
+                                <li><a asp-page="/Vehicles/Index">Xe</a></li>
+                                <li><a asp-page="/Orders/Index">Đơn Hàng</a></li>
+                                <li><a asp-page="/Payments/Index">Thanh Toán</a></li>
+                            </ul>
+                        </div>
+                        <div class="col-6">
+                            <h6 class="text-warning mb-2">Công ty</h6>
+                            <ul class="list-unstyled footer-links mb-0">
+                                <li><a asp-page="/About">Giới thiệu</a></li>
+                                <li><a asp-page="/Contact">Liên hệ</a></li>
+                                <li><a asp-page="/Privacy">Bảo mật</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-4 text-md-end">
+                    <div class="mb-2">
+                        <a class="btn btn-outline-light btn-sm me-2" asp-page="/Contact"><i class="bi bi-envelope me-1"></i>Liên hệ</a>
+                        <a class="btn btn-outline-light btn-sm" asp-page="/Privacy"><i class="bi bi-shield-check me-1"></i>Bảo mật</a>
+                    </div>
+
+                    <div class="d-flex justify-content-md-end gap-3 mt-2">
+                        <a class="text-white-50 fs-5" href="#" aria-label="Facebook"><i class="bi bi-facebook"></i></a>
+                        <a class="text-white-50 fs-5" href="#" aria-label="Twitter"><i class="bi bi-twitter"></i></a>
+                        <a class="text-white-50 fs-5" href="#" aria-label="LinkedIn"><i class="bi bi-linkedin"></i></a>
+                    </div>
+                </div>
+            </div>
+
+            <hr class="border-light my-4" />
+
+            <div class="d-flex flex-column flex-md-row justify-content-between align-items-center small">
+                <div class="text-white-50">© 2025 - Gr8 Vehicle Dealer System</div>
+                <div class="mt-2 mt-md-0">
+                    <a class="text-white-50 me-3" asp-page="/Contact"><i class="bi bi-envelope"></i> Liên hệ</a>
+                    <a class="text-white-50 me-3" asp-page="/Privacy"><i class="bi bi-shield-check"></i> Bảo mật</a>
                 </div>
             </div>
         </div>
@@ -229,4 +290,4 @@
     </script>
     @await RenderSectionAsync("Scripts", required: false)
 </body>
-</html>image.png
+</html>
